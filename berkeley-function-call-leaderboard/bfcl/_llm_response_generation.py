@@ -9,6 +9,7 @@ from bfcl._apply_function_credential_config import apply_function_credential_con
 from bfcl.constant import (
     MULTI_TURN_FUNC_DOC_FILE_MAPPING,
     MULTI_TURN_FUNC_DOC_PATH,
+    SQL_FUNC_DOC_PATH,
     PROJECT_ROOT,
     PROMPT_PATH,
     RESULT_PATH,
@@ -23,6 +24,7 @@ from bfcl.utils import (
     is_executable,
     is_multi_turn,
     parse_test_category_argument,
+    is_sql,
     sort_key,
 )
 from tqdm import tqdm
@@ -134,9 +136,21 @@ def collect_test_cases(
         if test_case["id"] not in existing_ids
     ]
     test_cases_to_generate = process_multi_turn_test_case(test_cases_to_generate)
+    test_cases_to_generate = process_sql_test_case(test_cases_to_generate)
 
     return sorted(test_cases_to_generate, key=sort_key)
 
+def process_sql_test_case(test_cases):
+    """
+    SQL test cases don't have function doc in the prompt. We need to add them here.
+    """
+    for entry in test_cases:
+        if not is_sql(entry["id"]):
+            continue
+        func_doc = load_file(SQL_FUNC_DOC_PATH / "sql_function_source_code.json")
+        entry["function"] = func_doc
+
+    return test_cases
 
 def process_multi_turn_test_case(test_cases):
     """
