@@ -1,6 +1,7 @@
 import json
 import sys
 import re
+from typing import List
 
 def build_conditions(conditions):
     if not conditions:
@@ -11,13 +12,31 @@ def build_conditions(conditions):
         cond_strs.append(f"{col} {op} {val}")
     return " WHERE " + " AND ".join(cond_strs) if cond_strs else ""
 
-def select(table_name, columns=None, conditions=None):
+def select(table_name: str, columns: List[str], conditions: List[dict] = None, order_by: str = None, top: int = None, join: dict = None, group_by: str = None):
     """
-    SELECT
+    Select some columns from a table given conditions.
+
+    Args:
+        table_name (str): The name of the table to select from.
+        columns (List[str]): The columns to select. If * is given, all columns are selected.
+        conditions (List[dict]): A list of conditions to filter the rows by. Each condition is a dictionary with keys 'column', 'operator', and 'value'.
+        order_by (str): The column to order the results by.
+        top (int): The number of rows to return.
+        join (dict): A dictionary with keys 'table', 'on', and 'type' to specify a join.
+        group_by (str): The column to group the results by.
     """
     cols_str = ", ".join(columns) if columns else "*"
     where_clause = build_conditions(conditions or [])
-    return f"SELECT {cols_str} FROM {table_name}{where_clause};"
+    sql =  f"SELECT {cols_str} FROM {table_name}{where_clause}"
+    if order_by:
+        sql += f" ORDER BY {order_by}"
+    if top:
+        sql += f" LIMIT {top}"
+    if join:
+        sql += f" {join['type']} JOIN {join['table']} ON {join['on']}"
+    if group_by:
+        sql += f" GROUP BY {group_by}"
+    return sql
 
 def insert(table_name, columns, insert_values):
     """
