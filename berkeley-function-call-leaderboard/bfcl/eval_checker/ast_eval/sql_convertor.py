@@ -1,7 +1,4 @@
-import json
-import sys
-import re
-from typing import List
+from typing import List, Optional, Dict, Union
 
 def build_conditions(conditions):
     if not conditions:
@@ -38,262 +35,156 @@ def select(table_name: str, columns: List[str], conditions: List[dict] = None, o
         sql += f" GROUP BY {group_by}"
     return sql
 
-def insert(table_name, columns, insert_values):
+def insert(
+    table_name: str,
+    columns: List[str],
+    values: List[List[str]],
+    returning: Optional[str] = None
+) -> str:
     """
-    INSERT
+    Insert rows of data into a table with specified columns.
+
+    Args:
+        table_name (str): The name of the table to insert into.
+        columns (List[str]): A list of column names for the INSERT operation.
+        values (List[List[str]]): A list of rows, where each row is a list of values to insert.
+        returning (str, optional): A column or set of columns to return after the insertion.
+
+    Returns:
+        str: The constructed SQL INSERT query.
     """
     cols_str = f"({', '.join(columns)})"
-    values_rows = []
-    for row in insert_values:
-        quoted = [f"'{v}'" for v in row]
-        values_rows.append("(" + ", ".join(quoted) + ")")
-    values_str = ", ".join(values_rows)
-    return f"INSERT INTO {table_name} {cols_str} VALUES {values_str};"
+    values_str = ", ".join([f"({', '.join([f'\'{val}\'' for val in row])})" for row in values])
+    sql = f"INSERT INTO {table_name} {cols_str} VALUES {values_str}"
+    
+    if returning:
+        sql += f" RETURNING {returning}"
+    
+    return sql + ";"
 
-def update(table_name, columns, update_values, conditions):
+def update(
+    table_name: str,
+    updates: List[Dict[str, str]],
+    conditions: Optional[List[Dict[str, str]]] = None,
+    returning: Optional[str] = None,
+    limit: Optional[int] = None
+) -> str:
     """
-    UPDATE
+    Update values in specific columns of a table based on given conditions.
+
+    Args:
+        table_name (str): The name of the table to update.
+        updates (List[Dict[str, str]]): A list of updates, each defined as {'column': 'col_name', 'value': 'new_value'}.
+        conditions (List[Dict[str, str]], optional): A list of conditions, each defined as:
+            {'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}.
+        returning (str, optional): A column or set of columns to return after the update.
+        limit (int, optional): The maximum number of rows to update.
+
+    Returns:
+        str: The constructed SQL UPDATE query.
     """
-    filtered_cols = []
-    filtered_vals = []
-    for c, v in zip(columns, update_values):
-        if c.lower() != table_name.lower():
-            v = v.rstrip('.')
-            filtered_cols.append(c)
-            filtered_vals.append(v)
-    set_str = ", ".join([f"{c} = '{v}'" for c,v in zip(filtered_cols, filtered_vals)])
-    where_clause = build_conditions(conditions or [])
-    return f"UPDATE {table_name} SET {set_str}{where_clause};"
+    set_clause = ", ".join([f"{update['column']} = '{update['value']}'" for update in updates])
+    where_clause = ""
+    if conditions:
+        condition_strings = [
+            f"{cond['left']} {cond['sign']} '{cond['right']}'" for cond in conditions
+        ]
+        where_clause = " WHERE " + f" {conditions[0]['operator']} ".join(condition_strings)
+    
+    sql = f"UPDATE {table_name} SET {set_clause}{where_clause}"
+    
+    if returning:
+        sql += f" RETURNING {returning}"
+    
+    if limit:
+        sql += f" LIMIT {limit}"
+    
+    return sql + ";"
 
-def delete(table_name, conditions):
+
+def delete(
+    table_name: str,
+    conditions: Optional[List[Dict[str, str]]] = None,
+    returning: Optional[str] = None,
+    limit: Optional[int] = None
+) -> str:
     """
-    DELETE
+    Delete rows from a table that match given conditions.
+
+    Args:
+        table_name (str): The name of the table to delete from.
+        conditions (List[Dict[str, str]], optional): A list of conditions, each defined as:
+            {'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}.
+        returning (str, optional): A column or set of columns to return after the deletion.
+        limit (int, optional): The maximum number of rows to delete.
+
+    Returns:
+        str: The constructed SQL DELETE query.
     """
-    where_clause = build_conditions(conditions or [])
-    return f"DELETE FROM {table_name}{where_clause};"
+    where_clause = ""
+    if conditions:
+        condition_strings = [
+            f"{cond['left']} {cond['sign']} '{cond['right']}'" for cond in conditions
+        ]
+        where_clause = " WHERE " + f" {conditions[0]['operator']} ".join(condition_strings)
+    
+    sql = f"DELETE FROM {table_name}{where_clause}"
+    
+    if returning:
+        sql += f" RETURNING {returning}"
+    
+    if limit:
+        sql += f" LIMIT {limit}"
+    
+    return sql + ";"
 
-def create(table_name, columns):
+
+def create(
+    table_name: str,
+    columns: List[Dict[str, str]],
+    primary_key: Optional[str] = None,
+    foreign_keys: Optional[List[Dict[str, str]]] = None,
+    if_not_exists: bool = False,
+    indexes: Optional[List[Dict[str, Union[str, bool]]]] = None,
+    temporary: bool = False
+) -> str:
     """
-    CREATE
+    Create a new table with specified columns and constraints.
+
+    Args:
+        table_name (str): The name of the table to create.
+        columns (List[Dict[str, str]]): A list of column definitions, each defined as {'name': 'col_name', 'type': 'col_type', 'constraints': 'constraints'}.
+        primary_key (str, optional): The column to use as the primary key.
+        foreign_keys (List[Dict[str, str]], optional): A list of foreign key constraints, each defined as:
+            {'column': 'col_name', 'references': 'ref_table(ref_col)', 'on_delete': 'action', 'on_update': 'action'}.
+        if_not_exists (bool, optional): Whether to include the IF NOT EXISTS clause.
+        indexes (List[Dict[str, Union[str, bool]]], optional): A list of indexes, each defined as {'name': 'index_name', 'columns': ['col1', 'col2'], 'unique': True/False}.
+        temporary (bool, optional): Whether to create a temporary table.
+
+    Returns:
+        str: The constructed SQL CREATE TABLE query.
     """
-    defs = [f"{c} VARCHAR(255)" for c in columns]
-    return f"CREATE TABLE {table_name} ({', '.join(defs)});"
-
-def detect_operation(question):
-    ql = question.lower()
-    if ("create" in ql or "generate" in ql) and "table" in ql:
-        return "CREATE"
-    if "change" in ql or "modify" in ql:
-        return "UPDATE"
-    if "remove" in ql or "erase" in ql or "delete" in ql:
-        return "DELETE"
-    if "add" in ql or "insert" in ql or "record" in ql or "store" in ql:
-        return "INSERT"
-    return "SELECT"
-
-def extract_table_name(question):
-    patterns = [
-        r"table named ['\"]([\w_]+)['\"]",
-        r"named ['\"]([\w_]+)['\"]",
-        r"in the ['\"]([\w_]+)['\"] table",
-        r"[\"']([\w_]+)[\"'] table",
-        r"from the ['\"]([\w_]+)['\"] table"
-    ]
-    for pat in patterns:
-        m = re.search(pat, question, re.IGNORECASE)
-        if m:
-            return m.group(1)
-    m = re.search(r"['\"]([\w_]+)['\"] table", question, re.IGNORECASE)
-    if m:
-        return m.group(1)
-    return None
-
-def extract_conditions(question):
-    conditions = []
-    c_m = re.search(r"the condition ['\"](\w+)\s*=\s*(\w+)['\"]", question, re.IGNORECASE)
-    if c_m:
-        col, val = c_m.groups()
-        conditions.append([col, "=", val])
-
-    with_id = re.search(r"with the id\s+(\d+)", question, re.IGNORECASE)
-    if with_id and not any(c[0]=="id" for c in conditions):
-        conditions.append(["id", "=", with_id.group(1)])
-    else:
-        gen_id = re.search(r"\bID\s+(\d+)\b", question)
-        if gen_id and not any(c[0]=="id" for c in conditions):
-            conditions.append(["id", "=", gen_id.group(1)])
-
-    cond_custom = re.search(r"with\s+['\"]?(\w+)['\"]?\s+(\d+)", question, re.IGNORECASE)
-    if cond_custom:
-        ccol, cval = cond_custom.groups()
-        if not any(c[0].lower()==ccol.lower() for c in conditions):
-            conditions.append([ccol, "=", cval])
-
-    lt = re.search(r"(\w+)\s+(less than|<)\s+(\d+(\.\d+)?)", question, re.IGNORECASE)
-    if lt:
-        col, _, val, _ = lt
-        conditions.append([col, "<", val])
-
-    gt = re.search(r"(\w+)\s+(above|greater than|>)\s+(\d+(\.\d+)?)", question, re.IGNORECASE)
-    if gt:
-        col, _, val, _ = gt
-        conditions.append([col, ">", val])
-
-    return conditions
-
-def extract_create_columns(question, table_name):
-    all_quoted = re.findall(r"[\"'](\w+)[\"']", question)
-    return [w for w in all_quoted if w.lower() != table_name.lower()]
-
-def extract_select_columns(question, table_name):
-    col_pattern = re.search(r"the columns\s+(.+?)(\?|$)", question, re.IGNORECASE)
-    if col_pattern:
-        segment = col_pattern.group(1)
-        c_list = re.findall(r"[\"'](\w+)[\"']", segment)
-        c_list = [c for c in c_list if c.lower() != table_name.lower() and not c.isdigit()]
-        if c_list:
-            return c_list
-    all_quoted = re.findall(r"[\"']([^\"']+)[\"']", question)
-    filtered = []
-    for w in all_quoted:
-        if w.lower() != table_name.lower() and not re.match(r"^\d+(\.\d+)?$", w):
-            filtered.append(w)
-    return filtered
-
-def extract_update_info(question):
-    matches = re.findall(r"[\"'](\w+)[\"'].*?\bto\b\s+[\"']?(\w+)[\"']?", question, re.IGNORECASE)
-    if matches:
-        cols, vals = zip(*matches)
-        return list(cols), list(vals)
-    return [], []
-
-def extract_insert_info(question, known_columns):
-    pattern = r"[\"'](\w+)[\"']\s+is\s+[\"']([^\"']+)[\"']"
-    matches = re.findall(pattern, question, re.IGNORECASE)
-    if matches:
-        if known_columns:
-            cols = []
-            vals = []
-            for c,v in matches:
-                if c in known_columns:
-                    cols.append(c)
-                    vals.append(v)
-            if len(cols) == len(known_columns):
-                return cols, [vals]
-        else:
-            cols = [m[0] for m in matches]
-            vals = [m[1] for m in matches]
-            return cols, [vals]
-
-    values_dict = {}
-
-    name_match = re.search(r"named\s+'([^']+)'", question, re.IGNORECASE)
-    if name_match and any(c.lower()=="name" for c in known_columns):
-        values_dict["Name"] = name_match.group(1)
-
-    id_match = re.search(r"with\s+(?:id|ID)\s+'([^']+)'", question)
-    if id_match:
-        val = id_match.group(1)
-        cid = None
-        for c in known_columns:
-            if c.lower()=="studentid":
-                cid = c
-                break
-        if not cid and "ID" in known_columns:
-            cid = "ID"
-        if cid:
-            values_dict[cid] = val
-
-    score_match = re.search(r"scored\s+'([^']+)'", question, re.IGNORECASE)
-    if score_match:
-        score_val = score_match.group(1)
-        for c in known_columns:
-            if c.lower()=="testscore":
-                values_dict[c] = score_val
-                break
-
-    date_match = re.search(r"on\s+'(\d{4}-\d{2}-\d{2})'", question)
-    if date_match:
-        dt = date_match.group(1)
-        for c in known_columns:
-            if c.lower()=="testdate":
-                values_dict[c] = dt
-                break
-
-    for col in known_columns:
-        if col not in values_dict:
-            pat = rf"\b{col}\b\s+is\s+'([^']+)'"
-            m = re.search(pat, question, re.IGNORECASE)
-            if m:
-                values_dict[col] = m.group(1)
-
-    if len(values_dict) == len(known_columns):
-        vals = [values_dict[c] for c in known_columns]
-        return known_columns, [vals]
-
-    return [], []
-
-def process_sql_json(json_data):
-    question = json_data.get("question", [{}])[0].get("content", "")
-    operation = detect_operation(question)
-    table_name = extract_table_name(question)
-    if not table_name:
-        raise ValueError("Could not determine table name")
-
-    conditions = extract_conditions(question)
-
-    if operation == "CREATE":
-        columns = extract_create_columns(question, table_name)
-        return f"Processed: {json_data['id']}: {create(table_name, columns)}"
-
-    elif operation == "UPDATE":
-        cols, vals = extract_update_info(question)
-        if not cols or not vals:
-            raise ValueError("Could not determine columns/values for UPDATE")
-        return f"Processed: {json_data['id']}: {update(table_name, cols, vals, conditions)}"
-
-    elif operation == "DELETE":
-        return f"Processed: {json_data['id']}: {delete(table_name, conditions)}"
-
-    elif operation == "INSERT":
-        col_mention = re.search(r"(columns?\s+named|with\s+the\s+columns|with\s+columns)", question, re.IGNORECASE)
-        if col_mention:
-            after_part = question[col_mention.end():]
-            all_quoted = re.findall(r"[\"'](\w+)[\"']", after_part)
-            known_columns = [c for c in all_quoted if c.lower()!=table_name.lower()]
-        else:
-            all_quoted = re.findall(r"[\"'](\w+)[\"']", question)
-            known_columns = [w for w in all_quoted if w.lower()!=table_name.lower() and not w.isdigit()]
-
-        cols, insert_vals = extract_insert_info(question, known_columns)
-        if not cols or not insert_vals:
-            raise ValueError("Could not determine columns/values for INSERT")
-        return f"Processed: {json_data['id']}: {insert(table_name, cols, insert_vals)}"
-
-    else:
-        columns = extract_select_columns(question, table_name)
-        return f"Processed: {json_data['id']}: {select(table_name, columns, conditions)}"
-
-def process_file(input_file, output_file):
-    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
-        for line in infile:
-            line=line.strip()
-            if not line:
-                continue
-            try:
-                data = json.loads(line)
-                result = process_sql_json(data)
-                outfile.write(result+"\n")
-                print(result)
-            except json.JSONDecodeError as e:
-                print(f"Error parsing JSON line: {e}")
-            except Exception as e:
-                print(f"Error processing query: {e}")
-
-if __name__ == "__main__":
-    if len(sys.argv)!=3:
-        print("Usage: python script.py input_file output_file")
-        sys.exit(1)
-    input_file=sys.argv[1]
-    output_file=sys.argv[2]
-    process_file(input_file, output_file)
+    col_definitions = ", ".join([f"{col['name']} {col['type']} {col.get('constraints', '')}" for col in columns])
+    
+    sql = f"CREATE {'TEMPORARY ' if temporary else ''}TABLE {'IF NOT EXISTS ' if if_not_exists else ''}{table_name} ({col_definitions}"
+    
+    if primary_key:
+        sql += f", PRIMARY KEY ({primary_key})"
+    
+    if foreign_keys:
+        fk_clauses = [
+            f", FOREIGN KEY ({fk['column']}) REFERENCES {fk['references']} ON DELETE {fk.get('on_delete', 'NO ACTION')} ON UPDATE {fk.get('on_update', 'NO ACTION')}"
+            for fk in foreign_keys
+        ]
+        sql += "".join(fk_clauses)
+    
+    sql += ")"
+    
+    if indexes:
+        for index in indexes:
+            unique = "UNIQUE" if index.get('unique', False) else ""
+            index_name = index['name']
+            index_columns = ", ".join(index['columns'])
+            sql += f"; CREATE {unique} INDEX {index_name} ON {table_name} ({index_columns})"
+    
+    return sql + ";"
