@@ -20,7 +20,7 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of a table to query. 
-            columns (List[str]): A list of column names to select. If * is given, all columns are selected. The column names must be alphabetically sorted as the arguments of the select function.
+            columns (List[str]): A list of column names to select. If * is given, all columns are selected. The column input order matters and must be alphabetically sorted as the arguments of the function.
             conditions (List[Dict[str, str]], optional): A list of conditions in the form: [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=. The dictionary keys must be presented in the order of 'operator', 'left', 'sign', 'right'.
                 - operator (str): The operator to use for the condition. Can be 'AND' or 'OR'.
                 - left (str): The left side of the condition.
@@ -69,7 +69,7 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of the table to insert into.
-            columns (List[str]): A list of column names for the INSERT operation.
+            columns (List[str]): A list of column names for the INSERT operation. The column input order matters and must be alphabetically sorted as the arguments of the function.
             values (List[List[str]]): A list of rows, where each row is a list of values to insert.
 
         Returns:
@@ -91,7 +91,7 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of the table to update.
-            columns (List[str]): A list of column names to update. The column inputs must be alphabetically sorted as the arguments of the function.
+            columns (List[str]): A list of column names to update. The column input order matters and must be alphabetically sorted as the arguments of the function.
             values (List[str]): A list of corresponding values to update.
             conditions (List[Dict[str, str]], optional): A list of conditions in the form: [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=. The dictionary keys must be presented in the order of 'operator', 'left', 'sign', 'right'.
                 - operator (str): The operator to use for the condition. Can be 'AND' or 'OR'.
@@ -148,7 +148,7 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of the table to create.
-            columns (List[str]): A list of column definitions, e.g., ['column1', 'column2']. The column inputs must be alphabetically sorted as the arguments of the function.
+            columns (List[str]): A list of column definitions, e.g., ['column1', 'column2']. The column input order matters and must be alphabetically sorted as the arguments of the function.
             column_types (List[str]): A list of column types, e.g., ['INT', 'VARCHAR(255)']. If a column type is not specified, it defaults to VARCHAR(255).
 
         Returns:
