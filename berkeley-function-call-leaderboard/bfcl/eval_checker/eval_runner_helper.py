@@ -633,6 +633,7 @@ def check_model_category_status(score_path):
         "java",
         "javascript",
         "rest",
+        "sql"
         "live_simple",
         "live_multiple",
         "live_parallel",

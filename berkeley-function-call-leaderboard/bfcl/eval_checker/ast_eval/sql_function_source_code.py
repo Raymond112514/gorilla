@@ -20,15 +20,21 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of a table to query. 
-            columns (List[str]): A list of column names to select. If * is given, all columns are selected.
-            conditions (List[Dict[str, str]], optional): A list of conditions in the form: [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=.
+            columns (List[str]): A list of column names to select. If * is given, all columns are selected. The column names must be alphabetically sorted as the arguments of the select function.
+            conditions (List[Dict[str, str]], optional): A list of conditions in the form: [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=. The dictionary keys must be presented in the order of 'operator', 'left', 'sign', 'right'.
+                - operator (str): The operator to use for the condition. Can be 'AND' or 'OR'.
+                - left (str): The left side of the condition.
+                - sign (str): The sign of the condition. Can be '=', '!=', '<', '>', '<=', '>='.
+                - right (str): The right side of the condition.
             order_by (List[str], optional): A list of columns to order the result by.
             desc (bool, optional): If order_by is specified, this flag indicates whether to sort in descending order. Default is False.
             limit (int, optional): The maximum number of rows to return.
             top (int, optional): The maximum number of rows to return.
-            join (dict, optional): A dictionary containing the join_type, table_name, and join_condition. Join types can be INNER, LEFT, RIGHT, FULL, CROSS, NATURAL. Join conditions are in the form: 'table1.column1 = table2.column2'.
+            join (Dict, optional): A dictionary containing the join_type, table_name, and join_condition. Join types can be INNER, LEFT, RIGHT, FULL, CROSS, NATURAL. Join conditions are in the form: 'table1.column1 = table2.column2'.
             group_by (str, optional): The column to group the results by.
-
+                - join_type (str): The type of join to perform. Can be 'INNER', 'LEFT', 'RIGHT', 'FULL', 'CROSS', 'NATURAL'.
+                - table_name (str): The name of the table to join.
+                - join_condition (str): The condition to join the tables on.
         Returns:
             str: The constructed SQL SELECT query.
         """
@@ -85,10 +91,13 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of the table to update.
-            columns (List[str]): A list of column names to update.
+            columns (List[str]): A list of column names to update. The column inputs must be alphabetically sorted as the arguments of the function.
             values (List[str]): A list of corresponding values to update.
-            conditions (List[Dict[str, str]], optional): A list of conditions in the form:
-                [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=.
+            conditions (List[Dict[str, str]], optional): A list of conditions in the form: [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=. The dictionary keys must be presented in the order of 'operator', 'left', 'sign', 'right'.
+                - operator (str): The operator to use for the condition. Can be 'AND' or 'OR'.
+                - left (str): The left side of the condition.
+                - sign (str): The sign of the condition. Can be '=', '!=', '<', '>', '<=', '>='.
+                - right (str): The right side of the condition.
 
         Returns:
             str: The constructed SQL UPDATE query.
@@ -112,9 +121,11 @@ class SQLAPI:
 
         Args:
             table_name (str): The name of the table to delete from.
-            conditions (List[Dict[str, str]], optional): A list of conditions in the form:
-                [{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=.
-
+            conditions (List[Dict[str, str]], optional): A list of conditions in the form:[{'operator': 'AND', 'left': 'column_name', 'sign': '=', 'right': 'value'}]. Operators can be AND, OR. Signs can be =, !=, <, >, <=, >=. The dictionary keys must be presented in the order of 'operator', 'left', 'sign', 'right'.
+                - operator (str): The operator to use for the condition. Can be 'AND' or 'OR'.
+                - left (str): The left side of the condition.
+                - sign (str): The sign of the condition. Can be '=', '!=', '<', '>', '<=', '>='.
+                - right (str): The right side of the condition.
         Returns:
             str: The constructed SQL DELETE query.
         """
@@ -129,17 +140,18 @@ class SQLAPI:
 
     def create(
         table_name: str,
-        columns: List[str]
+        columns: List[str],
+        column_types: List[str]
     ) -> str:
         """
         Create a table with specified columns.
 
         Args:
             table_name (str): The name of the table to create.
-            columns (List[str]): A list of column definitions, e.g., ['id INT PRIMARY KEY', 'name VARCHAR(255)'].
+            columns (List[str]): A list of column definitions, e.g., ['column1', 'column2']. The column inputs must be alphabetically sorted as the arguments of the function.
+            column_types (List[str]): A list of column types, e.g., ['INT', 'VARCHAR(255)']. If a column type is not specified, it defaults to VARCHAR(255).
 
         Returns:
             str: The constructed SQL CREATE query.
         """
-        columns_str = ", ".join(columns)
-        return f"CREATE TABLE {table_name} ({columns_str});"
+        return f"CREATE TABLE {table_name} ({', '.join([f'{col} {col_type}' for col, col_type in zip(columns, column_types)])});"
