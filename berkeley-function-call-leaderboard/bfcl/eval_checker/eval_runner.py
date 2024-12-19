@@ -365,7 +365,7 @@ def ast_file_runner(
     for i in range(len(model_result)):
         model_result_item = model_result[i]["result"]
         if is_sql(test_category):
-            with open(SQL_FUNC_DOC_PATH + "sql_function_source_code.json", "r") as f:
+            with open((SQL_FUNC_DOC_PATH/"sql_function_source_code.json").resolve(), "r") as f:
                 prompt_item = [json.loads(line) for line in f.readlines()]
         else:
             prompt_item = prompt[i]["function"]
