@@ -289,9 +289,10 @@ def generate_leaderboard_csv(
         )
         rest_simple_exec_non_live = value.get("rest", {"accuracy": 0, "total_count": 0})
         irrelevance_non_live = value.get("irrelevance", {"accuracy": 0, "total_count": 0})
+        sql_non_live = value.get("sql", {"accuracy": 0, "total_count": 0})
 
         simple_ast_non_live = calculate_unweighted_accuracy(
-            [python_simple_ast_non_live, java_simple_ast_non_live, javascript_simple_ast_non_live]
+            [python_simple_ast_non_live, java_simple_ast_non_live, javascript_simple_ast_non_live, sql_non_live]
         )
         multiple_ast_non_live = python_multiple_ast_non_live
         parallel_ast_non_live = python_parallel_ast_non_live
