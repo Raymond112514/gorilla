@@ -33,7 +33,7 @@ def find_file_with_suffix(folder_path: Path, suffix: str) -> Path:
 
 
 def is_agentic(test_category):
-    return "web_search" in test_category
+    return "web_search" in test_category or "memory" in test_category
 
 
 def is_multi_turn(test_category):

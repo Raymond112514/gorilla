@@ -15,6 +15,7 @@ CLASS_FILE_PATH_MAPPING = {
     "VehicleControlAPI": "bfcl.eval_checker.multi_turn_eval.func_source_code.vehicle_control",
     # The following classes are not part of the multi-turn categories suite, but they share the same evaluation pipeline for simplicity
     "WebSearchAPI": "bfcl.eval_checker.multi_turn_eval.func_source_code.web_search",
+    "MemoryAPI": "bfcl.eval_checker.multi_turn_eval.func_source_code.memory",
 }
 
 # These classes are stateless and do not require any initial configuration
