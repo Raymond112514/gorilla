@@ -37,6 +37,15 @@ class MemoryAPI:
                 f,
             )
 
+    def send_message_to_user(self, message: str):
+        """
+        Send a message to the user. This is the only way you can communicate with the user.
+
+        Args:
+            message (str): The message to send to the user.
+        """
+        return None
+
     def short_term_memory_add(self, key: str, value: str):
         """
         Add a key-value pair to the short-term memory. Make sure to use meaningful keys for easy retrieval later.
