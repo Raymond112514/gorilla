@@ -1,12 +1,13 @@
 import argparse
 import json
-import os
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 
 from bfcl._apply_function_credential_config import apply_function_credential_config
 from bfcl.constant import (
+    MEMORY_PREREQ_CONVERSATION_PATH,
     MULTI_TURN_FUNC_DOC_FILE_MAPPING,
     MULTI_TURN_FUNC_DOC_PATH,
     PROJECT_ROOT,
@@ -20,8 +21,10 @@ from bfcl.model_handler.handler_map import HANDLER_MAP
 from bfcl.model_handler.model_style import ModelStyle
 from bfcl.utils import (
     check_api_key_supplied,
+    extract_test_category_from_id,
     is_agentic,
     is_executable,
+    is_memory,
     is_multi_turn,
     parse_test_category_argument,
     sort_key,
@@ -56,7 +59,7 @@ def get_args():
         "--skip-server-setup",
         action="store_true",
         default=False,
-        help="Skip vLLM/SGLang server setup and use existing endpoint specified by the VLLM_ENDPOINT and VLLM_PORT environment variables."
+        help="Skip vLLM/SGLang server setup and use existing endpoint specified by the VLLM_ENDPOINT and VLLM_PORT environment variables.",
     )
     args = parser.parse_args()
     return args
@@ -93,7 +96,9 @@ def get_involved_test_entries(test_category_args, run_ids):
                 all_test_file_paths.append(test_file_path)
 
     else:
-        all_test_file_paths, all_test_categories = parse_test_category_argument(test_category_args)
+        all_test_file_paths, all_test_categories = parse_test_category_argument(
+            test_category_args
+        )
         # Make a copy here since we are removing list elemenets inside the for loop
         for test_category, file_to_open in zip(
             all_test_categories[:], all_test_file_paths[:]
@@ -141,14 +146,54 @@ def collect_test_cases(
         for test_case in all_test_entries_involved
         if test_case["id"] not in existing_ids
     ]
-    test_cases_to_generate = process_multi_turn_test_case(test_cases_to_generate)
+
+    test_cases_to_generate = process_memory_test_case(test_cases_to_generate)
+    test_cases_to_generate = populate_test_cases_with_predefined_functions(test_cases_to_generate)
 
     return sorted(test_cases_to_generate, key=sort_key)
 
 
-def process_multi_turn_test_case(test_cases):
+def process_memory_test_case(test_cases):
     """
-    Multi-turn test cases don't have the function doc in the prompt. We need to add them here.
+    Memory test cases needs to have the memory write phase carried out before the inference phase. So we configure some test case dependencies here.
+    """
+    if not any([is_memory(entry["id"]) for entry in test_cases]):
+        return test_cases
+
+    memory_basic = load_file(MEMORY_PREREQ_CONVERSATION_PATH / "memory_basic.json")
+    memory_conflict = load_file(MEMORY_PREREQ_CONVERSATION_PATH / "memory_conflict.json")
+
+    memory_basic_ids = []
+    memory_conflict_ids = []
+
+    # Assign unique IDs and dependencies to each prerequisite entry
+    for i, entry in enumerate(memory_basic):
+        entry["id"] = f"memory_basic_prereq_{i}"
+        entry["depends_on"] = deepcopy(memory_basic_ids)
+        memory_basic_ids.append(entry["id"])
+
+    for i, entry in enumerate(memory_conflict):
+        entry["id"] = f"memory_conflict_prereq_{i}"
+        entry["depends_on"] = deepcopy(memory_conflict_ids)
+        memory_conflict_ids.append(entry["id"])
+
+    assert len(memory_basic_ids) == len(memory_basic) == 10
+
+    # Assign dependencies to the actual test cases
+    for entry in test_cases:
+        if is_memory(entry["id"]):
+            if "conflict" in entry["id"]:
+                entry["depends_on"] = deepcopy(memory_conflict_ids)
+            else:
+                entry["depends_on"] = deepcopy(memory_basic_ids)
+
+    test_cases = memory_basic + memory_conflict + test_cases
+    return test_cases
+
+
+def populate_test_cases_with_predefined_functions(test_cases):
+    """
+    Multi-turn and Agentic test cases don't have the function doc in the prompt. We need to add them here.
     """
     for entry in test_cases:
         if not is_multi_turn(entry["id"]) and not is_agentic(entry["id"]):
@@ -178,9 +223,15 @@ def process_multi_turn_test_case(test_cases):
     return test_cases
 
 
-def multi_threaded_inference(handler, test_case, include_input_log, exclude_state_log):
+def multi_threaded_inference(
+    handler, test_case, events, include_input_log, exclude_state_log
+):
 
     assert type(test_case["function"]) is list
+
+    # Wait for all dependencies to complete
+    for dependency_id in test_case.get("depends_on", []):
+        events[dependency_id].wait()  # Wait until the dependent task sets its event
 
     retry_count = 0
 
@@ -191,8 +242,6 @@ def multi_threaded_inference(handler, test_case, include_input_log, exclude_stat
             )
             break  # Success, exit the loop
         except Exception as e:
-            # TODO: It might be better to handle the exception in the handler itself rather than a universal catch block here, as each handler use different ways to call the endpoint.
-            # OpenAI has openai.RateLimitError while Anthropic has anthropic.RateLimitError. It would be more robust in the long run.
             if retry_count < RETRY_LIMIT and (
                 "rate limit reached" in str(e).lower()
                 or (hasattr(e, "status_code") and (e.status_code in {429, 503, 500}))
@@ -218,6 +267,9 @@ def multi_threaded_inference(handler, test_case, include_input_log, exclude_stat
                     "id": test_case["id"],
                     "result": f"Error during inference: {str(e)}",
                 }
+
+    # Signal that the current task is complete
+    events[test_case["id"]].set()
 
     result_to_write = {
         "id": test_case["id"],
@@ -249,6 +301,7 @@ def generate_results(args, model_name, test_cases_total):
 
     else:
         futures = []
+        events = {test_case["id"]: threading.Event() for test_case in test_cases_total}
         with ThreadPoolExecutor(max_workers=args.num_threads) as executor:
             with tqdm(
                 total=len(test_cases_total), desc=f"Generating results for {model_name}"
@@ -259,6 +312,7 @@ def generate_results(args, model_name, test_cases_total):
                         multi_threaded_inference,
                         handler,
                         test_case,
+                        events,
                         args.include_input_log,
                         args.exclude_state_log,
                     )
