@@ -1,50 +1,50 @@
-{"id": "memory_0", "ground_truth": ["Advanced Algorithms"], "source": "My favorite class this semester is definitely Advanced Algorithms."}
-{"id": "memory_1", "ground_truth": ["No"], "source": "Initially, it was intimidating, but the professor\u2019s approach is to make it more about conceptual understanding than pure math."}
-{"id": "memory_2", "ground_truth": ["Distributed Systems"], "source": "I\u2019m taking a Distributed Systems course, which is probably the second hardest... we\u2019re working on a major project that\u2019s supposed to simulate a decentralized file storage system."}
-{"id": "memory_3", "ground_truth": ["Yes"], "source": "My group and I decided to work on a project that uses machine learning to analyze social media sentiment for better emergency response."}
-{"id": "memory_4", "ground_truth": ["Ten hours"], "source": "Capstone alone can eat up a solid ten hours a week\u2014more if you run into a big bug..."}
-{"id": "memory_5", "ground_truth": ["Gym"], "source": "Now, I try to hit the gym around four times a week."}
-{"id": "memory_6", "ground_truth": ["Yes"], "source": "Lately, I\u2019ve been really into co-op survival games \u2014 the kind where you have to gather resources..."}
-{"id": "memory_7", "ground_truth": ["Ethical and social implications"], "source": "Books like that also help me consider the ethical and social implications of what I\u2019m studying..."}
-{"id": "memory_8", "ground_truth": ["Yes"], "source": "I\u2019ve found that scheduling them \u2014 just like I schedule study time \u2014 helps me keep a healthy balance."}
-{"id": "memory_9", "ground_truth": ["Gym"], "source": "It\u2019s not like I\u2019m trying to become a bodybuilder or anything, but I love seeing incremental improvements."}
-{"id": "memory_10", "ground_truth": ["No"], "source": "Eventually, I co-authored my first paper on this system... it\u2019s probably one of my proudest moments in college."}
-{"id": "memory_11", "ground_truth": ["Oceanic temperature changes"], "source": "The first research project I really got into was about visualizing oceanic temperature changes over time for a climate study group."}
-{"id": "memory_12", "ground_truth": ["Yes"], "source": "We\u2019re exploring how VR or AR technologies might help scientists get an even more intuitive feel for complex data."}
-{"id": "memory_13", "ground_truth": ["IEEE VIS"], "source": "The bigger conference is the IEEE Visualization Conference (commonly known as IEEE VIS)..."}
-{"id": "memory_14", "ground_truth": ["No"], "source": "That crisis hammered home the importance of data hygiene, backing up everything routinely, and maintaining robust workflows."}
-{"id": "memory_15", "ground_truth": ["No"], "source": "Beyond that, there\u2019s this VR/AR Club I\u2019ve been attending on and off since my sophomore year."}
-{"id": "memory_16", "ground_truth": ["The central lawn"], "source": "The lawn is also where some of the biggest campus events take place, like our annual Tech Fest."}
-{"id": "memory_17", "ground_truth": ["The Engi-House"], "source": "In my first two years, I stayed in a dorm that was specifically for engineering majors\u2014 'The Engi-House,' as we jokingly called it."}
-{"id": "memory_18", "ground_truth": ["Yes"], "source": "Our CS department organizes a 'Tech for Good' day... Volunteers like me help run mini-workshops..."}
-{"id": "memory_19", "ground_truth": ["Yes"], "source": "One cool development is that our school\u2019s e-sports team has gained official recognition."}
-{"id": "memory_20", "ground_truth": ["Yes"], "source": "Right now, I\u2019m leaning heavily towards going into the industry for at least a few years..."}
-{"id": "memory_21", "ground_truth": ["Yes"], "source": "part of me is really intrigued by the idea of continuing my research in immersive analytics or even branching into human-computer interaction..."}
-{"id": "memory_22", "ground_truth": ["No"], "source": "I did an internship last summer at a mid-sized tech startup that specialized in data analytics software..."}
-{"id": "memory_23", "ground_truth": ["Data visualization, VR/AR"], "source": "I\u2019ve been exploring software engineering roles that overlap with the fields I\u2019ve grown passionate about\u2014data visualization, VR/AR technologies..."}
-{"id": "memory_24", "ground_truth": ["Yes"], "source": "I\u2019d love to end up at a company that encourages cross-functional collaboration\u2014with designers, data scientists..."}
-{"id": "memory_25", "ground_truth": ["No"], "source": "It was a sailing trip off the coast of Maine."}
-{"id": "memory_26", "ground_truth": ["Japan"], "source": "My travel bug really kicked in during my junior year, when I saved up money from a summer internship to go to Japan over winter break."}
-{"id": "memory_27", "ground_truth": ["Yes"], "source": "I went to Tokyo first... After a few days there, I headed to Kyoto..."}
-{"id": "memory_28", "ground_truth": ["London and Paris"], "source": "My parents, my sister, and I flew into London... After London, we hopped on a train to Paris."}
-{"id": "memory_29", "ground_truth": ["Yes"], "source": "Beyond the bigger international trips, I\u2019ve also done some smaller getaways... we\u2019ll drive out to a state park or a nearby beach town."}
-{"id": "memory_30", "ground_truth": ["Advanced Algorithms"], "source": "She\u2019s actually in my advanced algorithms class."}
-{"id": "memory_31", "ground_truth": ["Yes"], "source": "We ended up on the same team for a project about a month ago..."}
-{"id": "memory_32", "ground_truth": ["Coffee"], "source": "I\u2019ve thought about asking her to grab coffee after class..."}
-{"id": "memory_33", "ground_truth": ["No"], "source": "I\u2019m also worried about losing focus. The last thing I want is to get overly distracted..."}
-{"id": "memory_34", "ground_truth": ["No"], "source": "I usually tell them everything, but this time I\u2019m keeping it a bit more under wraps..."}
-{"id": "memory_35", "ground_truth": ["Yes"], "source": "...our golden retriever, Archie..."}
-{"id": "memory_36", "ground_truth": ["Six"], "source": "I\u2019m twenty-two... my sister... just turned sixteen."}
-{"id": "memory_37", "ground_truth": ["Yes"], "source": "One of our family traditions is going on a Saturday morning hike whenever I\u2019m in town."}
-{"id": "memory_38", "ground_truth": ["Software engineer"], "source": "My dad is a software engineer..."}
-{"id": "memory_39", "ground_truth": ["Grandma"], "source": "My grandma still teases me about the time I broke her antique vase..."}
-{"id": "memory_40", "ground_truth": ["Tony"], "source": "...my roommate and best friend from freshman year, Tony..."}
-{"id": "memory_41", "ground_truth": ["Yes"], "source": "We ended up bonding over pizza at 3 a.m. because we were the only two left in the lab so late."}
-{"id": "memory_42", "ground_truth": ["Sailing club"], "source": "I also have a couple of friends I met through the campus sailing club."}
-{"id": "memory_43", "ground_truth": ["Gaming"], "source": "I spend a decent chunk of time on weekends playing multiplayer strategy games, especially when I need a mental break..."}
-{"id": "memory_44", "ground_truth": ["No"], "source": "One of those people is Jackson, a law student who somehow ended up reading case studies right next to my stack of cryptography textbooks..."}
-{"id": "memory_45", "ground_truth": ["6:30"], "source": "I usually wake up around 6:30 in the morning."}
-{"id": "memory_46", "ground_truth": ["Yes"], "source": "I use a digital task manager that syncs across my devices..."}
-{"id": "memory_47", "ground_truth": ["Yes"], "source": "I\u2019ve discovered that if I skip the gym too many days... I consider my workout time to be non-negotiable..."}
-{"id": "memory_48", "ground_truth": ["Yes"], "source": "After dinner, around 8:00 or 9:00 P.M., I fall into my study groove again..."}
-{"id": "memory_49", "ground_truth": ["No"], "source": "Saturdays might be partially dedicated to longer assignments or bigger project milestones."}
+{"id": "memory_base_0", "ground_truth": ["Advanced Algorithms"], "source": "My favorite class this semester is definitely Advanced Algorithms."}
+{"id": "memory_base_1", "ground_truth": ["No"], "source": "Initially, it was intimidating, but the professor\u2019s approach is to make it more about conceptual understanding than pure math."}
+{"id": "memory_base_2", "ground_truth": ["Distributed Systems"], "source": "I\u2019m taking a Distributed Systems course, which is probably the second hardest... we\u2019re working on a major project that\u2019s supposed to simulate a decentralized file storage system."}
+{"id": "memory_base_3", "ground_truth": ["Yes"], "source": "My group and I decided to work on a project that uses machine learning to analyze social media sentiment for better emergency response."}
+{"id": "memory_base_4", "ground_truth": ["Ten hours"], "source": "Capstone alone can eat up a solid ten hours a week\u2014more if you run into a big bug..."}
+{"id": "memory_base_5", "ground_truth": ["Gym"], "source": "Now, I try to hit the gym around four times a week."}
+{"id": "memory_base_6", "ground_truth": ["Yes"], "source": "Lately, I\u2019ve been really into co-op survival games \u2014 the kind where you have to gather resources..."}
+{"id": "memory_base_7", "ground_truth": ["Ethical and social implications"], "source": "Books like that also help me consider the ethical and social implications of what I\u2019m studying..."}
+{"id": "memory_base_8", "ground_truth": ["Yes"], "source": "I\u2019ve found that scheduling them \u2014 just like I schedule study time \u2014 helps me keep a healthy balance."}
+{"id": "memory_base_9", "ground_truth": ["Gym"], "source": "It\u2019s not like I\u2019m trying to become a bodybuilder or anything, but I love seeing incremental improvements."}
+{"id": "memory_base_10", "ground_truth": ["No"], "source": "Eventually, I co-authored my first paper on this system... it\u2019s probably one of my proudest moments in college."}
+{"id": "memory_base_11", "ground_truth": ["Oceanic temperature changes"], "source": "The first research project I really got into was about visualizing oceanic temperature changes over time for a climate study group."}
+{"id": "memory_base_12", "ground_truth": ["Yes"], "source": "We\u2019re exploring how VR or AR technologies might help scientists get an even more intuitive feel for complex data."}
+{"id": "memory_base_13", "ground_truth": ["IEEE VIS"], "source": "The bigger conference is the IEEE Visualization Conference (commonly known as IEEE VIS)..."}
+{"id": "memory_base_14", "ground_truth": ["No"], "source": "That crisis hammered home the importance of data hygiene, backing up everything routinely, and maintaining robust workflows."}
+{"id": "memory_base_15", "ground_truth": ["No"], "source": "Beyond that, there\u2019s this VR/AR Club I\u2019ve been attending on and off since my sophomore year."}
+{"id": "memory_base_16", "ground_truth": ["The central lawn"], "source": "The lawn is also where some of the biggest campus events take place, like our annual Tech Fest."}
+{"id": "memory_base_17", "ground_truth": ["The Engi-House"], "source": "In my first two years, I stayed in a dorm that was specifically for engineering majors\u2014 'The Engi-House,' as we jokingly called it."}
+{"id": "memory_base_18", "ground_truth": ["Yes"], "source": "Our CS department organizes a 'Tech for Good' day... Volunteers like me help run mini-workshops..."}
+{"id": "memory_base_19", "ground_truth": ["Yes"], "source": "One cool development is that our school\u2019s e-sports team has gained official recognition."}
+{"id": "memory_base_20", "ground_truth": ["Yes"], "source": "Right now, I\u2019m leaning heavily towards going into the industry for at least a few years..."}
+{"id": "memory_base_21", "ground_truth": ["Yes"], "source": "part of me is really intrigued by the idea of continuing my research in immersive analytics or even branching into human-computer interaction..."}
+{"id": "memory_base_22", "ground_truth": ["No"], "source": "I did an internship last summer at a mid-sized tech startup that specialized in data analytics software..."}
+{"id": "memory_base_23", "ground_truth": ["Data visualization, VR/AR"], "source": "I\u2019ve been exploring software engineering roles that overlap with the fields I\u2019ve grown passionate about\u2014data visualization, VR/AR technologies..."}
+{"id": "memory_base_24", "ground_truth": ["Yes"], "source": "I\u2019d love to end up at a company that encourages cross-functional collaboration\u2014with designers, data scientists..."}
+{"id": "memory_base_25", "ground_truth": ["No"], "source": "It was a sailing trip off the coast of Maine."}
+{"id": "memory_base_26", "ground_truth": ["Japan"], "source": "My travel bug really kicked in during my junior year, when I saved up money from a summer internship to go to Japan over winter break."}
+{"id": "memory_base_27", "ground_truth": ["Yes"], "source": "I went to Tokyo first... After a few days there, I headed to Kyoto..."}
+{"id": "memory_base_28", "ground_truth": ["London and Paris"], "source": "My parents, my sister, and I flew into London... After London, we hopped on a train to Paris."}
+{"id": "memory_base_29", "ground_truth": ["Yes"], "source": "Beyond the bigger international trips, I\u2019ve also done some smaller getaways... we\u2019ll drive out to a state park or a nearby beach town."}
+{"id": "memory_base_30", "ground_truth": ["Advanced Algorithms"], "source": "She\u2019s actually in my advanced algorithms class."}
+{"id": "memory_base_31", "ground_truth": ["Yes"], "source": "We ended up on the same team for a project about a month ago..."}
+{"id": "memory_base_32", "ground_truth": ["Coffee"], "source": "I\u2019ve thought about asking her to grab coffee after class..."}
+{"id": "memory_base_33", "ground_truth": ["No"], "source": "I\u2019m also worried about losing focus. The last thing I want is to get overly distracted..."}
+{"id": "memory_base_34", "ground_truth": ["No"], "source": "I usually tell them everything, but this time I\u2019m keeping it a bit more under wraps..."}
+{"id": "memory_base_35", "ground_truth": ["Yes"], "source": "...our golden retriever, Archie..."}
+{"id": "memory_base_36", "ground_truth": ["Six"], "source": "I\u2019m twenty-two... my sister... just turned sixteen."}
+{"id": "memory_base_37", "ground_truth": ["Yes"], "source": "One of our family traditions is going on a Saturday morning hike whenever I\u2019m in town."}
+{"id": "memory_base_38", "ground_truth": ["Software engineer"], "source": "My dad is a software engineer..."}
+{"id": "memory_base_39", "ground_truth": ["Grandma"], "source": "My grandma still teases me about the time I broke her antique vase..."}
+{"id": "memory_base_40", "ground_truth": ["Tony"], "source": "...my roommate and best friend from freshman year, Tony..."}
+{"id": "memory_base_41", "ground_truth": ["Yes"], "source": "We ended up bonding over pizza at 3 a.m. because we were the only two left in the lab so late."}
+{"id": "memory_base_42", "ground_truth": ["Sailing club"], "source": "I also have a couple of friends I met through the campus sailing club."}
+{"id": "memory_base_43", "ground_truth": ["Gaming"], "source": "I spend a decent chunk of time on weekends playing multiplayer strategy games, especially when I need a mental break..."}
+{"id": "memory_base_44", "ground_truth": ["No"], "source": "One of those people is Jackson, a law student who somehow ended up reading case studies right next to my stack of cryptography textbooks..."}
+{"id": "memory_base_45", "ground_truth": ["6:30"], "source": "I usually wake up around 6:30 in the morning."}
+{"id": "memory_base_46", "ground_truth": ["Yes"], "source": "I use a digital task manager that syncs across my devices..."}
+{"id": "memory_base_47", "ground_truth": ["Yes"], "source": "I\u2019ve discovered that if I skip the gym too many days... I consider my workout time to be non-negotiable..."}
+{"id": "memory_base_48", "ground_truth": ["Yes"], "source": "After dinner, around 8:00 or 9:00 P.M., I fall into my study groove again..."}
+{"id": "memory_base_49", "ground_truth": ["No"], "source": "Saturdays might be partially dedicated to longer assignments or bigger project milestones."}

@@ -1,50 +1,50 @@
-{"id": "memory_0", "question": [[{"role": "user", "content": "Which course is the student's favorite?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_1", "question": [[{"role": "user", "content": "Does the student's quantum computing class initially feel easy?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_2", "question": [[{"role": "user", "content": "Which class project simulates a decentralized file storage system?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_3", "question": [[{"role": "user", "content": "Does the student's Capstone project use machine learning?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_4", "question": [[{"role": "user", "content": "How many hours a week can the Capstone project require?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_5", "question": [[{"role": "user", "content": "Which activity does the student do about four times weekly?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_6", "question": [[{"role": "user", "content": "Does the student enjoy co-op survival games?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_7", "question": [[{"role": "user", "content": "What do AI-themed sci-fi books help the student consider?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_8", "question": [[{"role": "user", "content": "Does the student schedule hobbies just like study time?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_9", "question": [[{"role": "user", "content": "Which hobby shows the student incremental improvements?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_10", "question": [[{"role": "user", "content": "Did the student co-author any papers in high school?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_11", "question": [[{"role": "user", "content": "What was the first research project about?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_12", "question": [[{"role": "user", "content": "Is the student exploring VR or AR in their research?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_13", "question": [[{"role": "user", "content": "Which major conference is the student aiming to submit to?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_14", "question": [[{"role": "user", "content": "Did a server crash teach the student about hardware failures?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_15", "question": [[{"role": "user", "content": "Was the student part of the VR/AR Club in freshman year?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_16", "question": [[{"role": "user", "content": "Where does the annual Tech Fest take place?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_17", "question": [[{"role": "user", "content": "What was the student's dorm called in the first two years?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_18", "question": [[{"role": "user", "content": "Does the student volunteer at \u201cTech for Good\u201d day?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_19", "question": [[{"role": "user", "content": "Is the e-sports team officially recognized on campus?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_20", "question": [[{"role": "user", "content": "Is the student planning to work in industry first?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_21", "question": [[{"role": "user", "content": "Is the student intrigued by grad school for immersive analytics and HCI?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_22", "question": [[{"role": "user", "content": "Did the student do an internship at a large data analytics company?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_23", "question": [[{"role": "user", "content": "Which personal interests drive the student's job search?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_24", "question": [[{"role": "user", "content": "Does the student want cross-functional collaboration in a future job?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_25", "question": [[{"role": "user", "content": "Did the student travel off the coast of Florida for sailing?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_26", "question": [[{"role": "user", "content": "Which country did the student visit over junior-year winter break?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_27", "question": [[{"role": "user", "content": "Did the student visit both Tokyo and Kyoto?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_28", "question": [[{"role": "user", "content": "Which two European cities did the student visit with family?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_29", "question": [[{"role": "user", "content": "Does the student sometimes do spontaneous trips to a state park or beach town?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_30", "question": [[{"role": "user", "content": "What class is the student's crush in?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_31", "question": [[{"role": "user", "content": "Did they first connect through a project team?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_32", "question": [[{"role": "user", "content": "Is the student planning to invite her for coffee or boba?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_33", "question": [[{"role": "user", "content": "Is the student unconcerned about losing academic focus?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_34", "question": [[{"role": "user", "content": "Has the student told their family about this crush yet?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_35", "question": [[{"role": "user", "content": "Is the student's dog named Archie?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_36", "question": [[{"role": "user", "content": "How many years younger is the student's sister?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_37", "question": [[{"role": "user", "content": "Does the family often hike on Saturday mornings?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_38", "question": [[{"role": "user", "content": "What's the student's dad's profession?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_39", "question": [[{"role": "user", "content": "Which relative teases the student about breaking an antique vase?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_40", "question": [[{"role": "user", "content": "Who was the student\u2019s freshman-year roommate?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_41", "question": [[{"role": "user", "content": "Did the student bond with Carla over a 3 a.m. coding session?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_42", "question": [[{"role": "user", "content": "Which club introduced the student to people who share a water sport interest?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_43", "question": [[{"role": "user", "content": "What does the student use on the weekends as a mental break?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_44", "question": [[{"role": "user", "content": "Did the student meet Jackson, a law student, at the gym?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_45", "question": [[{"role": "user", "content": "What time in the morning does the student usually wake up?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_46", "question": [[{"role": "user", "content": "Does the student use a digital task manager?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_47", "question": [[{"role": "user", "content": "Is workout time treated as non-negotiable by the student?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_48", "question": [[{"role": "user", "content": "Does the student often code or study after dinner?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_49", "question": [[{"role": "user", "content": "Does the student set aside Saturday solely for going out?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_0", "question": [[{"role": "user", "content": "Which course is the student's favorite?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_1", "question": [[{"role": "user", "content": "Does the student's quantum computing class initially feel easy?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_2", "question": [[{"role": "user", "content": "Which class project simulates a decentralized file storage system?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_3", "question": [[{"role": "user", "content": "Does the student's Capstone project use machine learning?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_4", "question": [[{"role": "user", "content": "How many hours a week can the Capstone project require?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_5", "question": [[{"role": "user", "content": "Which activity does the student do about four times weekly?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_6", "question": [[{"role": "user", "content": "Does the student enjoy co-op survival games?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_7", "question": [[{"role": "user", "content": "What do AI-themed sci-fi books help the student consider?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_8", "question": [[{"role": "user", "content": "Does the student schedule hobbies just like study time?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_9", "question": [[{"role": "user", "content": "Which hobby shows the student incremental improvements?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_10", "question": [[{"role": "user", "content": "Did the student co-author any papers in high school?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_11", "question": [[{"role": "user", "content": "What was the first research project about?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_12", "question": [[{"role": "user", "content": "Is the student exploring VR or AR in their research?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_13", "question": [[{"role": "user", "content": "Which major conference is the student aiming to submit to?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_14", "question": [[{"role": "user", "content": "Did a server crash teach the student about hardware failures?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_15", "question": [[{"role": "user", "content": "Was the student part of the VR/AR Club in freshman year?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_16", "question": [[{"role": "user", "content": "Where does the annual Tech Fest take place?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_17", "question": [[{"role": "user", "content": "What was the student's dorm called in the first two years?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_18", "question": [[{"role": "user", "content": "Does the student volunteer at \u201cTech for Good\u201d day?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_19", "question": [[{"role": "user", "content": "Is the e-sports team officially recognized on campus?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_20", "question": [[{"role": "user", "content": "Is the student planning to work in industry first?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_21", "question": [[{"role": "user", "content": "Is the student intrigued by grad school for immersive analytics and HCI?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_22", "question": [[{"role": "user", "content": "Did the student do an internship at a large data analytics company?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_23", "question": [[{"role": "user", "content": "Which personal interests drive the student's job search?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_24", "question": [[{"role": "user", "content": "Does the student want cross-functional collaboration in a future job?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_25", "question": [[{"role": "user", "content": "Did the student travel off the coast of Florida for sailing?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_26", "question": [[{"role": "user", "content": "Which country did the student visit over junior-year winter break?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_27", "question": [[{"role": "user", "content": "Did the student visit both Tokyo and Kyoto?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_28", "question": [[{"role": "user", "content": "Which two European cities did the student visit with family?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_29", "question": [[{"role": "user", "content": "Does the student sometimes do spontaneous trips to a state park or beach town?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_30", "question": [[{"role": "user", "content": "What class is the student's crush in?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_31", "question": [[{"role": "user", "content": "Did they first connect through a project team?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_32", "question": [[{"role": "user", "content": "Is the student planning to invite her for coffee or boba?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_33", "question": [[{"role": "user", "content": "Is the student unconcerned about losing academic focus?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_34", "question": [[{"role": "user", "content": "Has the student told their family about this crush yet?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_35", "question": [[{"role": "user", "content": "Is the student's dog named Archie?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_36", "question": [[{"role": "user", "content": "How many years younger is the student's sister?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_37", "question": [[{"role": "user", "content": "Does the family often hike on Saturday mornings?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_38", "question": [[{"role": "user", "content": "What's the student's dad's profession?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_39", "question": [[{"role": "user", "content": "Which relative teases the student about breaking an antique vase?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_40", "question": [[{"role": "user", "content": "Who was the student\u2019s freshman-year roommate?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_41", "question": [[{"role": "user", "content": "Did the student bond with Carla over a 3 a.m. coding session?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_42", "question": [[{"role": "user", "content": "Which club introduced the student to people who share a water sport interest?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_43", "question": [[{"role": "user", "content": "What does the student use on the weekends as a mental break?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_44", "question": [[{"role": "user", "content": "Did the student meet Jackson, a law student, at the gym?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_45", "question": [[{"role": "user", "content": "What time in the morning does the student usually wake up?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_46", "question": [[{"role": "user", "content": "Does the student use a digital task manager?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_47", "question": [[{"role": "user", "content": "Is workout time treated as non-negotiable by the student?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_48", "question": [[{"role": "user", "content": "Does the student often code or study after dinner?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_base_49", "question": [[{"role": "user", "content": "Does the student set aside Saturday solely for going out?"}]], "involved_classes": ["MemoryAPI"]}

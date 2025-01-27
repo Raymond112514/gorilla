@@ -100,17 +100,6 @@ class MemoryAPI:
                 indent=4,
             )
 
-    def send_message_to_user(self, message: str):
-        """
-        Send a message to the user.
-        This is the ONLY way to provide visible text or notifications to the user.
-        The user does not see any of your internal operations, such as managing memory or other function calls, unless you explicitly use 'send_message_to_user' to share that information.
-
-        Args:
-            message (str): The message to send to the user.
-        """
-        return None
-
     def short_term_memory_add(self, key: str, value: str):
         """
         Add a key-value pair to the short-term memory. Make sure to use meaningful keys for easy retrieval later.
