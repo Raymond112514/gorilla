@@ -148,7 +148,9 @@ def collect_test_cases(
     ]
 
     test_cases_to_generate = process_memory_test_case(test_cases_to_generate)
-    test_cases_to_generate = populate_test_cases_with_predefined_functions(test_cases_to_generate)
+    test_cases_to_generate = populate_test_cases_with_predefined_functions(
+        test_cases_to_generate
+    )
 
     return sorted(test_cases_to_generate, key=sort_key)
 
@@ -165,6 +167,8 @@ def process_memory_test_case(test_cases):
 
     memory_basic_ids = []
     memory_conflict_ids = []
+
+    add_basic, add_conflict = False, False
 
     # Assign unique IDs and dependencies to each prerequisite entry
     for i, entry in enumerate(memory_basic):
@@ -184,10 +188,17 @@ def process_memory_test_case(test_cases):
         if is_memory(entry["id"]):
             if "conflict" in entry["id"]:
                 entry["depends_on"] = deepcopy(memory_conflict_ids)
+                add_conflict = True
             else:
                 entry["depends_on"] = deepcopy(memory_basic_ids)
+                add_basic = True
 
-    test_cases = memory_basic + memory_conflict + test_cases
+    # Add the memory prerequisite entries to the test cases
+    if add_basic:
+        test_cases += memory_basic
+    if add_conflict:
+        test_cases += memory_conflict
+
     return test_cases
 
 

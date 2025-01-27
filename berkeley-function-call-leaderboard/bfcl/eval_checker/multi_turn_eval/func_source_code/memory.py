@@ -1,5 +1,8 @@
 import json
 from copy import deepcopy
+from pathlib import Path
+
+from bfcl.utils import extract_test_category_from_id
 
 MAX_SHORT_TERM_MEMORY_SIZE = 7
 MAX_SHORT_TERM_MEMORY_ENTRY_LENGTH = 300
@@ -20,21 +23,50 @@ class MemoryAPI:
     def _load_scenario(self, initial_config: dict, long_context: bool = False):
         # We don't care about the long_context parameter here
         # It's there to match the signature of functions in the multi-turn evaluation code
-        self.short_term_memory = deepcopy(initial_config["short_term_memory"])
-        self.long_term_memory = deepcopy(initial_config["long_term_memory"])
+        result_dir: Path = initial_config["result_dir"]
+        model_name_dir: str = initial_config["model_name_dir"]
+        test_category: str = initial_config["test_category"]
+        target_file = (
+            result_dir / model_name_dir / "memory_snapshot" / f"{test_category}_final.json"
+        )
 
-    def _flush_memory_to_local_file(self, file_path: str):
+        if not target_file.exists():
+            raise FileNotFoundError(f"Memory snapshot file not found: {target_file}")
+
+        with open(target_file, "r") as f:
+            memory_data = json.load(f)
+            self.short_term_memory = deepcopy(memory_data["short_term_memory"])
+            self.long_term_memory = deepcopy(memory_data["long_term_memory"])
+
+    def _flush_memory_to_local_file(
+        self, result_dir: Path, model_name_dir: str, test_entry_id: str
+    ):
         """
         Flush (save) current memory (both short-term and long-term)
         to a local JSON file.
         """
-        with open(file_path, "w") as f:
+        test_category = extract_test_category_from_id(test_entry_id)
+
+        target_dir = result_dir / model_name_dir / "memory_snapshot"
+        target_dir.mkdir(parents=True, exist_ok=True)
+
+        with open(target_dir / f"{test_entry_id}.json", "w") as f:
             json.dump(
                 {
                     "short_term_memory": self.short_term_memory,
                     "long_term_memory": self.long_term_memory,
                 },
                 f,
+                indent=4,
+            )
+        with open(target_dir / f"{test_category}_final.json", "w") as f:
+            json.dump(
+                {
+                    "short_term_memory": self.short_term_memory,
+                    "long_term_memory": self.long_term_memory,
+                },
+                f,
+                indent=4,
             )
 
     def send_message_to_user(self, message: str):
