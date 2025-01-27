@@ -74,7 +74,7 @@ class BaseHandler:
         test_category: str = test_entry_id.rsplit("_", 1)[0]
 
         # Special handling for the memory category, as it loads the initial configuration from local files
-        if is_memory(test_entry_id) and not is_memory_prereq(test_entry_id):
+        if is_memory(test_entry_id):
             initial_config["MemoryAPI"] = {
                 "result_dir": result_dir,
                 "model_name_dir": self.model_name_dir,
@@ -337,7 +337,7 @@ class BaseHandler:
         test_category: str = test_entry_id.rsplit("_", 1)[0]
 
         # Special handling for the memory category, as it loads the initial configuration from local files
-        if is_memory(test_entry_id) and not is_memory_prereq(test_entry_id):
+        if is_memory(test_entry_id):
             initial_config["MemoryAPI"] = {
                 "result_dir": result_dir,
                 "model_name_dir": self.model_name_dir,

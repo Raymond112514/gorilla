@@ -18,11 +18,12 @@ class MemoryAPI:
     def __init__(self):
         self.short_term_memory = {}
         self.long_term_memory = {}
-        self._api_description = "This tool belongs to the memory suite, which provides APIs to manage short-term and long-term memory data."
+        self._api_description = """This tool belongs to the memory suite, which provides APIs to manage both short-term and long-term memory data. Short-term memory is limited in size and can be accessed quickly, while long-term memory is larger but takes longer to access. Both type of memory is persistent across multiple conversations with the user, and can be accessed in a later interactions."""
 
     def _load_scenario(self, initial_config: dict, long_context: bool = False):
         # We don't care about the long_context parameter here
         # It's there to match the signature of functions in the multi-turn evaluation code
+        print(initial_config)
         result_dir: Path = initial_config["result_dir"]
         model_name_dir: str = initial_config["model_name_dir"]
         test_category: str = initial_config["test_category"]
@@ -30,13 +31,14 @@ class MemoryAPI:
             result_dir / model_name_dir / "memory_snapshot" / f"{test_category}_final.json"
         )
 
-        if not target_file.exists():
-            raise FileNotFoundError(f"Memory snapshot file not found: {target_file}")
-
-        with open(target_file, "r") as f:
-            memory_data = json.load(f)
-            self.short_term_memory = deepcopy(memory_data["short_term_memory"])
-            self.long_term_memory = deepcopy(memory_data["long_term_memory"])
+        if target_file.exists():
+            with open(target_file, "r") as f:
+                memory_data = json.load(f)
+                self.short_term_memory = deepcopy(memory_data["short_term_memory"])
+                self.long_term_memory = deepcopy(memory_data["long_term_memory"])
+        else:
+            # raise FileNotFoundError(f"Memory snapshot file not found: {target_file}")
+            print(f"Memory snapshot file not found: {target_file}")
 
     def _flush_memory_to_local_file(
         self, result_dir: Path, model_name_dir: str, test_entry_id: str
@@ -71,7 +73,9 @@ class MemoryAPI:
 
     def send_message_to_user(self, message: str):
         """
-        Send a message to the user. This is the only way you can communicate with the user.
+        Send a message to the user. 
+        This is the ONLY way to provide visible text or notifications to the user. 
+        The user does not see any of your internal operations, such as managing memory or other function calls, unless you explicitly use 'send_message_to_user' to share that information.
 
         Args:
             message (str): The message to send to the user.
