@@ -162,26 +162,26 @@ def process_memory_test_case(test_cases):
     if not any([is_memory(entry["id"]) for entry in test_cases]):
         return test_cases
 
-    memory_basic = load_file(MEMORY_PREREQ_CONVERSATION_PATH / "memory_basic.json")
+    memory_base = load_file(MEMORY_PREREQ_CONVERSATION_PATH / "memory_base.json")
     memory_conflict = load_file(MEMORY_PREREQ_CONVERSATION_PATH / "memory_conflict.json")
 
-    memory_basic_ids = []
+    memory_base_ids = []
     memory_conflict_ids = []
 
     add_basic, add_conflict = False, False
 
     # Assign unique IDs and dependencies to each prerequisite entry
-    for i, entry in enumerate(memory_basic):
-        entry["id"] = f"memory_basic_prereq_{i}"
-        entry["depends_on"] = deepcopy(memory_basic_ids)
-        memory_basic_ids.append(entry["id"])
+    for i, entry in enumerate(memory_base):
+        entry["id"] = f"memory_base_prereq_{i}"
+        entry["depends_on"] = deepcopy(memory_base_ids)
+        memory_base_ids.append(entry["id"])
 
     for i, entry in enumerate(memory_conflict):
         entry["id"] = f"memory_conflict_prereq_{i}"
         entry["depends_on"] = deepcopy(memory_conflict_ids)
         memory_conflict_ids.append(entry["id"])
 
-    assert len(memory_basic_ids) == len(memory_basic) == 10
+    assert len(memory_base_ids) == len(memory_base) == 10
 
     # Assign dependencies to the actual test cases
     for entry in test_cases:
@@ -190,12 +190,12 @@ def process_memory_test_case(test_cases):
                 entry["depends_on"] = deepcopy(memory_conflict_ids)
                 add_conflict = True
             else:
-                entry["depends_on"] = deepcopy(memory_basic_ids)
+                entry["depends_on"] = deepcopy(memory_base_ids)
                 add_basic = True
 
     # Add the memory prerequisite entries to the test cases
     if add_basic:
-        test_cases += memory_basic
+        test_cases += memory_base
     if add_conflict:
         test_cases += memory_conflict
 
@@ -244,6 +244,7 @@ def multi_threaded_inference(
     for dependency_id in test_case.get("depends_on", []):
         events[dependency_id].wait()  # Wait until the dependent task sets its event
 
+    print("running test case", test_case["id"])
     retry_count = 0
 
     while True:

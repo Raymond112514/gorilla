@@ -45,7 +45,8 @@ TEST_FILE_MAPPING = {
     "multi_turn_composite": f"{VERSION_PREFIX}_multi_turn_composite.json",
     # Agentic Datasets
     "web_search": f"{VERSION_PREFIX}_web_search.json",
-    "memory": f"{VERSION_PREFIX}_memory.json",
+    "memory_base": f"{VERSION_PREFIX}_memory_base.json",
+    "memory_conflict": f"{VERSION_PREFIX}_memory_conflict.json",
 }
 
 TEST_COLLECTION_MAPPING = {
@@ -73,11 +74,17 @@ TEST_COLLECTION_MAPPING = {
         "multi_turn_miss_param",
         "multi_turn_long_context",
         "web_search",
-        "memory",
+        "memory_base",
+        "memory_conflict",
     ],
     "agentic": [
         "web_search",
-        "memory",
+        "memory_base",
+        "memory_conflict",
+    ],
+    "memory": [
+        "memory_base",
+        "memory_conflict",
     ],
     "multi_turn": [
         "multi_turn_base",
