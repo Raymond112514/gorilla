@@ -613,8 +613,8 @@ def runner(model_names, test_categories, api_sanity_check, result_dir, score_dir
 
             handler = get_handler(model_name_escaped)
 
-            # We don't evaluate chatable and SQL models in our current leaderboard
-            if is_chatable(test_category) or is_sql(test_category):
+            # We don't evaluate chatable and SQL models in our current leaderboard\
+            if is_chatable(test_category) or is_sql(test_category) or is_memory_prereq(test_category):
                 continue
 
             language = "Python"

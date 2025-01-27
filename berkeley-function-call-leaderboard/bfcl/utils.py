@@ -36,6 +36,10 @@ def is_memory(test_category):
     return "memory" in test_category
 
 
+def is_first_memory_prereq_entry(test_entry_id):
+    return "prereq_0" in test_entry_id
+
+
 def is_memory_prereq(test_category):
     return "prereq" in test_category
 

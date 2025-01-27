@@ -78,7 +78,7 @@ class BaseHandler:
             initial_config["MemoryAPI"] = {
                 "result_dir": result_dir,
                 "model_name_dir": self.model_name_dir,
-                "test_category": test_category,
+                "test_entry_id": test_entry_id,
             }
 
         # This is only for the miss function category
@@ -341,7 +341,7 @@ class BaseHandler:
             initial_config["MemoryAPI"] = {
                 "result_dir": result_dir,
                 "model_name_dir": self.model_name_dir,
-                "test_category": test_category,
+                "test_entry_id": test_entry_id,
             }
 
         # This is only for the miss function category

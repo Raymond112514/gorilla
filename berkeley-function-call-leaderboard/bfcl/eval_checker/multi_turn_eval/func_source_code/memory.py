@@ -1,8 +1,12 @@
 import json
 from copy import deepcopy
 from pathlib import Path
-
-from bfcl.utils import extract_test_category_from_id
+import shutil
+from bfcl.utils import (
+    extract_test_category_from_id,
+    is_first_memory_prereq_entry,
+    is_memory_prereq,
+)
 
 MAX_SHORT_TERM_MEMORY_SIZE = 7
 MAX_SHORT_TERM_MEMORY_ENTRY_LENGTH = 300
@@ -23,21 +27,46 @@ class MemoryAPI:
     def _load_scenario(self, initial_config: dict, long_context: bool = False):
         # We don't care about the long_context parameter here
         # It's there to match the signature of functions in the multi-turn evaluation code
-        print(initial_config)
         result_dir: Path = initial_config["result_dir"]
         model_name_dir: str = initial_config["model_name_dir"]
-        test_category: str = initial_config["test_category"]
-        target_file = (
-            result_dir / model_name_dir / "memory_snapshot" / f"{test_category}_final.json"
-        )
+        test_entry_id: str = initial_config["test_entry_id"]
+        test_category: str = extract_test_category_from_id(test_entry_id)
+        target_dir = result_dir / model_name_dir / "memory_snapshot"
+        if is_memory_prereq(test_category):
+            target_file = target_dir / f"{test_category}_final.json"
+        else:
+            target_file = target_dir / f"{test_category}_prereq_final.json"
 
-        if target_file.exists():
+        # TODO: Use a more elegant way to handle this
+        if is_first_memory_prereq_entry(test_entry_id):
+            if target_dir.exists():
+                # Removes the folder and all its contents
+                for item in target_dir.iterdir():
+                    if item.is_dir():
+                        # Remove subdirectory and its contents
+                        shutil.rmtree(item)
+                    else:
+                        # Remove file
+                        item.unlink()
+            else:
+                target_dir.mkdir(parents=True, exist_ok=True)
+
+            # TODO: Move this to the generation pipeline section
+            if (
+                result_dir / model_name_dir / f"BFCL_v3_{test_category}_result.json"
+            ).exists():
+                (
+                    result_dir / model_name_dir / f"BFCL_v3_{test_category}_result.json"
+                ).unlink()
+
+        elif target_file.exists():
             with open(target_file, "r") as f:
                 memory_data = json.load(f)
                 self.short_term_memory = deepcopy(memory_data["short_term_memory"])
                 self.long_term_memory = deepcopy(memory_data["long_term_memory"])
+
         else:
-            # raise FileNotFoundError(f"Memory snapshot file not found: {target_file}")
+            raise FileNotFoundError(f"Memory snapshot file not found: {target_file}")
             print(f"Memory snapshot file not found: {target_file}")
 
     def _flush_memory_to_local_file(
@@ -73,8 +102,8 @@ class MemoryAPI:
 
     def send_message_to_user(self, message: str):
         """
-        Send a message to the user. 
-        This is the ONLY way to provide visible text or notifications to the user. 
+        Send a message to the user.
+        This is the ONLY way to provide visible text or notifications to the user.
         The user does not see any of your internal operations, such as managing memory or other function calls, unless you explicitly use 'send_message_to_user' to share that information.
 
         Args:
