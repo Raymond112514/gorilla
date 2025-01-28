@@ -10,7 +10,7 @@ from bfcl.utils import (
 
 MAX_SHORT_TERM_MEMORY_SIZE = 7
 MAX_SHORT_TERM_MEMORY_ENTRY_LENGTH = 300
-MAX_LONG_TERM_MEMORY_SIZE = 100  #FIXME: Change this to 50
+MAX_LONG_TERM_MEMORY_SIZE = 100  # FIXME: Change this to 50
 MAX_LONG_TERM_MEMORY_ENTRY_LENGTH = 2000
 
 
@@ -164,7 +164,7 @@ class MemoryAPI:
 
     def short_term_memory_clear(self):
         """
-        Clear all key-value pairs from the short-term memory.
+        Clear all key-value pairs from the short-term memory, including those from previous interactions. This operation is irreversible.
 
         Returns:
             status (str): Status of the operation.
@@ -174,10 +174,10 @@ class MemoryAPI:
 
     def short_term_memory_retrieve(self, key: str):
         """
-        Retrieve the value associated with a key from the short-term memory.
+        Retrieve the value associated with a key from the short-term memory. This function does not support partial key matching or similarity search.
 
         Args:
-            key (str): The key to retrieve. Case-sensitive.
+            key (str): The key to retrieve. Case-sensitive. The key must match exactly with the key stored in the memory.
 
         Returns:
             value (str): The value associated with the key.
@@ -268,7 +268,7 @@ class MemoryAPI:
 
     def long_term_memory_clear(self):
         """
-        Clear all key-value pairs from the long-term memory.
+        Clear all key-value pairs from the long-term memory, including those from previous interactions. This operation is irreversible.
 
         Returns:
             status (str): Status of the operation.
@@ -278,10 +278,10 @@ class MemoryAPI:
 
     def long_term_memory_retrieve(self, key: str):
         """
-        Retrieve the value associated with a key from the long-term memory.
+        Retrieve the value associated with a key from the long-term memory. This function does not support partial key matching or similarity search.
 
         Args:
-            key (str): The key to retrieve. Case-sensitive.
+            key (str): The key to retrieve. Case-sensitive. The key must match exactly with the key stored in the memory.
 
         Returns:
             value (str): The value associated with the key.
