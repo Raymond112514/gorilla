@@ -10,7 +10,7 @@ from bfcl.utils import (
 
 MAX_SHORT_TERM_MEMORY_SIZE = 7
 MAX_SHORT_TERM_MEMORY_ENTRY_LENGTH = 300
-MAX_LONG_TERM_MEMORY_SIZE = 50
+MAX_LONG_TERM_MEMORY_SIZE = 100  #FIXME: Change this to 50
 MAX_LONG_TERM_MEMORY_ENTRY_LENGTH = 2000
 
 
@@ -22,7 +22,7 @@ class MemoryAPI:
     def __init__(self):
         self.short_term_memory = {}
         self.long_term_memory = {}
-        self._api_description = """This tool belongs to the memory suite, which provides APIs to manage both short-term and long-term memory data. Short-term memory is limited in size and can be accessed quickly, while long-term memory is larger but takes longer to access. Both type of memory is persistent across multiple conversations with the user, and can be accessed in a later interactions."""
+        self._api_description = """This tool belongs to the memory suite, which provides APIs to manage both short-term and long-term memory data. Short-term memory is limited in size and can be accessed quickly, while long-term memory is larger but takes longer to access. Both type of memory is persistent across multiple conversations with the user, and can be accessed in a later interactions. You should actively manage the memory data to ensure that it is up-to-date and easy to retrieve later."""
 
     def _load_scenario(self, initial_config: dict, long_context: bool = False):
         # We don't care about the long_context parameter here
