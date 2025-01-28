@@ -96,10 +96,7 @@ def agentic_runner(
                 last_unsuccessful_decoding_message = model_result_item
                 continue
 
-        if (
-            not last_unsuccessful_decoding_message
-            or type(last_unsuccessful_decoding_message) != str
-        ):
+        if not last_unsuccessful_decoding_message:
             result.append(
                 {
                     "id": index,
@@ -137,8 +134,20 @@ def agentic_runner(
             temp["model_result_decoded"] = model_result_list_decoded
             temp["possible_answer"] = possible_answer_item
             temp["inference_log"] = model_result[i].get("inference_log", "")
-            result.append(temp)
+            # result.append(temp)
         else:
+            temp = {}
+            temp["id"] = index
+            # temp["model_name"] = model_name
+            # temp["test_category"] = test_category
+            temp["valid"] = accuracy_checker_result.pop("valid")
+            # temp["error"] = accuracy_checker_result
+            # temp["prompt"] = test_entry
+            temp["model_result_raw"] = model_result_list
+            temp["model_result_decoded"] = model_result_list_decoded
+            temp["possible_answer"] = possible_answer_item
+            # temp["inference_log"] = model_result[i].get("inference_log", "")
+            result.append(temp)
             correct_count += 1
 
     accuracy = correct_count / len(model_result)
@@ -614,7 +623,11 @@ def runner(model_names, test_categories, api_sanity_check, result_dir, score_dir
             handler = get_handler(model_name_escaped)
 
             # We don't evaluate chatable and SQL models in our current leaderboard\
-            if is_chatable(test_category) or is_sql(test_category) or is_memory_prereq(test_category):
+            if (
+                is_chatable(test_category)
+                or is_sql(test_category)
+                or is_memory_prereq(test_category)
+            ):
                 continue
 
             language = "Python"
