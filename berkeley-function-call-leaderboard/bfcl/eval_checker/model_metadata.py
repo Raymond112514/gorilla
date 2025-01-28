@@ -7,6 +7,12 @@ MODEL_METADATA_MAPPING = {
         "Gorilla LLM",
         "Apache 2.0",
     ],
+    "DeepSeek-V3": [
+        "DeepSeek-V3 (FC)",
+        "https://api-docs.deepseek.com/news/news1226",
+        "DeepSeek",
+        "DeepSeek License",
+    ],
     "o1-2024-12-17-FC": [
         "o1-2024-12-17 (FC)",
         "https://openai.com/o1/",
@@ -156,6 +162,12 @@ MODEL_METADATA_MAPPING = {
         "https://mistral.ai/news/mistral-large-2407/",
         "Mistral AI",
         "Proprietary",
+    ],
+    "mistralai/Ministral-8B-Instruct-2410": [
+        "Ministral-8B-Instruct-2410 (FC)",
+        "https://huggingface.co/mistralai/Ministral-8B-Instruct-2410",
+        "Mistral AI",
+        "Mistral AI Research License",
     ],
     "claude-3-sonnet-20240229-FC": [
         "Claude-3-Sonnet-20240229 (FC)",
@@ -799,6 +811,30 @@ MODEL_METADATA_MAPPING = {
         "xAI",
         "Proprietary",
     ],
+    "ZJared/Haha-7B": [
+        "Haha-7B",
+        "https://huggingface.co/ZJared/Haha-7B",
+        "TeleAI",
+        "Apache 2.0",
+    ],
+    "speakleash/Bielik-11B-v2.3-Instruct": [
+        "Bielik-11B-v2.3-Instruct (Prompt)",
+        "https://huggingface.co/speakleash/Bielik-11B-v2.3-Instruct",
+        "SpeakLeash & ACK Cyfronet AGH",
+        "Apache 2.0",
+    ],
+    "NovaSky-AI/Sky-T1-32B-Preview": [
+        "Sky-T1-32B-Preview (Prompt)",
+        "https://huggingface.co/NovaSky-AI/Sky-T1-32B-Preview",
+        "NovaSky-AI",
+        "apache-2.0",
+    ],
+    "Qwen/QwQ-32B-Preview": [
+        "QwQ-32B-Preview (Prompt)",
+        "https://huggingface.co/Qwen/QwQ-32B-Preview",
+        "Qwen",
+        "apache-2.0",
+    ],
 }
 
 INPUT_PRICE_PER_MILLION_TOKEN = {
@@ -950,6 +986,7 @@ OSS_LATENCY = {}
 NO_COST_MODELS = list(local_inference_handler_map.keys())
 # The following models will also have no cost, even though they are queries through the API.
 NO_COST_MODELS += [
+    "DeepSeek-V3",
     "Nexusflow-Raven-v2",
     "firefunction-v1-FC",
     "firefunction-v2-FC",

@@ -175,13 +175,14 @@ def executable_file_runner(
     result = []
     correct_count = 0
     for i in tqdm(range(len(model_result)), desc="Running tests"):
+        index: str = model_result[i]["id"]
         raw_result = model_result[i]["result"]
         try:
             decoded_result = handler.decode_execute(raw_result)
         except Exception as e:
             result.append(
                 {
-                    "id": i + 1,
+                    "id": index,
                     "model_name": model_name,
                     "test_category": test_category,
                     "valid": False,
@@ -198,7 +199,7 @@ def executable_file_runner(
             if not is_rest_format_output(decoded_result):
                 result.append(
                     {
-                        "id": i + 1,
+                        "id": index,
                         "model_name": model_name,
                         "test_category": test_category,
                         "valid": False,
@@ -219,7 +220,7 @@ def executable_file_runner(
             if not is_executable_format_output(decoded_result):
                 result.append(
                     {
-                        "id": i + 1,
+                        "id": index,
                         "model_name": model_name,
                         "test_category": test_category,
                         "valid": False,
@@ -243,7 +244,7 @@ def executable_file_runner(
             correct_count += 1
         else:
             temp = {}
-            temp["id"] = i + 1
+            temp["id"] = index
             temp["model_name"] = model_name
             temp["test_category"] = test_category
             temp["valid"] = checker_result["valid"]
@@ -282,6 +283,7 @@ def relevance_file_runner(
     result = []
     correct_count = 0
     for i in range(len(model_result)):
+        index: str = model_result[i]["id"]
         model_result_item = model_result[i]["result"]
         contain_func_call = False
         decoded_result = None
@@ -310,7 +312,7 @@ def relevance_file_runner(
             correct_count += 1
         else:
             temp = {}
-            temp["id"] = i + 1
+            temp["id"] = index
             temp["model_name"] = model_name
             temp["test_category"] = test_category
             temp["valid"] = success
@@ -363,6 +365,7 @@ def ast_file_runner(
     result = []
     correct_count = 0
     for i in range(len(model_result)):
+        index: str = model_result[i]["id"]
         model_result_item = model_result[i]["result"]
         if is_sql(test_category):
             with open((SQL_FUNC_DOC_PATH/"sql_function_source_code.json").resolve(), "r") as f:
@@ -377,7 +380,7 @@ def ast_file_runner(
         except Exception as e:
             result.append(
                 {
-                    "id": i + 1,
+                    "id": index,
                     "model_name": model_name,
                     "test_category": test_category,
                     "valid": False,
@@ -394,7 +397,7 @@ def ast_file_runner(
         if not decoder_output_valid:
             result.append(
                 {
-                    "id": i + 1,
+                    "id": index,
                     "model_name": model_name,
                     "test_category": test_category,
                     "valid": False,
@@ -423,7 +426,7 @@ def ast_file_runner(
             correct_count += 1
         else:
             temp = {}
-            temp["id"] = i + 1
+            temp["id"] = index
             temp["model_name"] = model_name
             temp["test_category"] = test_category
             temp["valid"] = checker_result["valid"]
@@ -607,7 +610,7 @@ def runner(model_names, test_categories, api_sanity_check, result_dir, score_dir
 
     # This function reads all the score files from local folder and updates the leaderboard table.
     # This is helpful when you only want to run the evaluation for a subset of models and test categories.
-    update_leaderboard_table_with_score_file(LEADERBOARD_TABLE, score_dir)
+    update_leaderboard_table_with_local_score_file(LEADERBOARD_TABLE, score_dir)
     # Write the leaderboard table to a file
     generate_leaderboard_csv(LEADERBOARD_TABLE, score_dir, model_names, test_categories)
 
@@ -650,7 +653,7 @@ def main(model, test_categories, api_sanity_check, result_dir, score_dir):
                 skipped_categories.append(test_category)
 
     model_names = None
-    if model is not None:
+    if model:
         model_names = []
         for model_name in model:
             # Runner takes in the model name that contains "_", instead of "/", for the sake of file path issues.
