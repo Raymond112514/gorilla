@@ -1,12 +1,14 @@
 import json
+import shutil
 from copy import deepcopy
 from pathlib import Path
-import shutil
+
 from bfcl.utils import (
     extract_test_category_from_id,
     is_first_memory_prereq_entry,
     is_memory_prereq,
 )
+from rank_bm25 import BM25Plus
 
 MAX_SHORT_TERM_MEMORY_SIZE = 7
 MAX_SHORT_TERM_MEMORY_ENTRY_LENGTH = 300
@@ -99,6 +101,25 @@ class MemoryAPI:
                 f,
                 indent=4,
             )
+
+    def _similarity_search(query: str, corpus: list[str], k: int = 5):
+        """
+        Search for the most similar text in the corpus to the query using BM25+ algorithm.
+
+        Args:
+            query (str): The query text to search for.
+            corpus (list[str]): A list of text strings to search in.
+            k (int): The number of results to return.
+
+        Returns:
+            ranked_results (list[tuple[float, str]]): A list of tuples containing the BM25+ score and the text string.
+        """
+        tokenized_corpus = [text.replace("_", " ").lower().split() for text in corpus]
+        bm25 = BM25Plus(tokenized_corpus)
+        tokenized_query = query.replace("_", " ").lower().split()
+        scores = bm25.get_scores(tokenized_query)
+        ranked_results = sorted(zip(scores, corpus), key=lambda x: x[0], reverse=True)
+        return {"ranked_results": ranked_results[:k]}
 
     def short_term_memory_add(self, key: str, value: str):
         """
@@ -195,6 +216,20 @@ class MemoryAPI:
             keys (List[str]): A list of all keys in the short-term memory.
         """
         return {"keys": list(self.short_term_memory.keys())}
+
+    def short_term_memory_key_search(self, query: str, k: int = 5):
+        """
+        Search for key names in the short-term memory that are similar to the query using BM25+ algorithm.
+
+        Args:
+            query (str): The query text to search for.
+            k (int, optional): The number of results to return.
+
+        Returns:
+            ranked_results (list[tuple[float, str]]): A list of tuples containing the BM25+ score and the key.
+        """
+        keys = deepcopy(list(self.short_term_memory.keys()))
+        return self._similarity_search(query, keys, k)
 
     def short_term_memory_retrieve_all(self):
         """
@@ -298,3 +333,17 @@ class MemoryAPI:
             keys (List[str]): A list of all keys in the long-term memory.
         """
         return {"keys": list(self.long_term_memory.keys())}
+
+    def long_term_memory_key_search(self, query: str, k: int = 5):
+        """
+        Search for key names in the long-term memory that are similar to the query using BM25+ algorithm.
+
+        Args:
+            query (str): The query text to search for.
+            k (int, optional): The number of results to return.
+
+        Returns:
+            ranked_results (list[tuple[float, str]]): A list of tuples containing the BM25+ score and the key.
+        """
+        keys = deepcopy(list(self.long_term_memory.keys()))
+        return self._similarity_search(query, keys, k)
