@@ -7,6 +7,7 @@ from bfcl.constant import (
     PROMPT_PATH,
     RESULT_PATH,
     SCORE_PATH,
+    SQL_FUNC_DOC_PATH,
     TEST_COLLECTION_MAPPING,
     TEST_FILE_MAPPING,
     VERSION_PREFIX,
@@ -308,12 +309,14 @@ def executable_file_runner(
     correct_count = 0
     for i in tqdm(range(len(model_result)), desc="Running tests"):
         index: str = model_result[i]["id"]
+        index: str = model_result[i]["id"]
         raw_result = model_result[i]["result"]
         try:
             decoded_result = handler.decode_execute(raw_result)
         except Exception as e:
             result.append(
                 {
+                    "id": index,
                     "id": index,
                     "model_name": model_name,
                     "test_category": test_category,
@@ -499,7 +502,11 @@ def ast_file_runner(
     for i in range(len(model_result)):
         index: str = model_result[i]["id"]
         model_result_item = model_result[i]["result"]
-        prompt_item = prompt[i]["function"]
+        if is_sql(test_category):
+            with open((SQL_FUNC_DOC_PATH/"sql_function_source_code.json").resolve(), "r") as f:
+                prompt_item = [json.loads(line) for line in f.readlines()]
+        else:
+            prompt_item = prompt[i]["function"]
         possible_answer_item = possible_answer[i]["ground_truth"]
 
         try:
@@ -625,7 +632,6 @@ def runner(model_names, test_categories, api_sanity_check, result_dir, score_dir
             # We don't evaluate chatable and SQL models in our current leaderboard\
             if (
                 is_chatable(test_category)
-                or is_sql(test_category)
                 or is_memory_prereq(test_category)
             ):
                 continue

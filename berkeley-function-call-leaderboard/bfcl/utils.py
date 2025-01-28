@@ -51,6 +51,9 @@ def is_agentic(test_category):
 def is_multi_turn(test_category):
     return "multi_turn" in test_category
 
+def is_sql(test_category):
+    return "sql" in test_category
+
 
 def contain_multi_turn_irrelevance(test_category):
     return "miss_func" in test_category or "miss_param" in test_category

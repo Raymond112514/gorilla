@@ -4,6 +4,7 @@ from pathlib import Path
 RESULT_PATH = "../result/"
 PROMPT_PATH = "../data/"
 MULTI_TURN_FUNC_DOC_PATH = "../data/multi_turn_func_doc/"
+SQL_FUNC_DOC_PATH = "../data/sql_func_doc/"
 POSSIBLE_ANSWER_PATH = "../data/possible_answer/"
 SCORE_PATH = "../score/"
 DOTENV_PATH = "../.env"
@@ -206,6 +207,7 @@ MULTI_TURN_FUNC_DOC_FILE_MAPPING = {
     # The following classes are not part of the multi-turn categories suite, but they share the same evaluation pipeline for simplicity
     "WebSearchAPI": "web_search.json",
     "MemoryAPI": "memory.json",
+    "SQLAPI": "sql.json",
 }
 
 
@@ -214,6 +216,7 @@ script_dir = Path(__file__).parent
 RESULT_PATH = (script_dir / RESULT_PATH).resolve()
 PROMPT_PATH = (script_dir / PROMPT_PATH).resolve()
 MULTI_TURN_FUNC_DOC_PATH = (script_dir / MULTI_TURN_FUNC_DOC_PATH).resolve()
+SQL_FUNC_DOC_PATH = (script_dir / SQL_FUNC_DOC_PATH).resolve()
 POSSIBLE_ANSWER_PATH = (script_dir / POSSIBLE_ANSWER_PATH).resolve()
 SCORE_PATH = (script_dir / SCORE_PATH).resolve()
 DOTENV_PATH = (script_dir / DOTENV_PATH).resolve()

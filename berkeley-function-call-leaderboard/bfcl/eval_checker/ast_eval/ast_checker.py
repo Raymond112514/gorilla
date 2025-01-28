@@ -35,7 +35,7 @@ def ast_checker(
             func_description, model_output, possible_answer, language, model_name
         )
         
-    elif "multiple" in test_category:
+    elif "multiple" in test_category or "sql" in test_category:
         return multiple_function_checker(
             func_description, model_output, possible_answer, language, model_name
         )

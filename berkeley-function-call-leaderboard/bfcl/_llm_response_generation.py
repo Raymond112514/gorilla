@@ -10,6 +10,7 @@ from bfcl.constant import (
     MEMORY_PREREQ_CONVERSATION_PATH,
     MULTI_TURN_FUNC_DOC_FILE_MAPPING,
     MULTI_TURN_FUNC_DOC_PATH,
+    SQL_FUNC_DOC_PATH,
     PROJECT_ROOT,
     PROMPT_PATH,
     RESULT_PATH,
@@ -27,6 +28,7 @@ from bfcl.utils import (
     is_memory,
     is_multi_turn,
     parse_test_category_argument,
+    is_sql,
     sort_key,
 )
 from tqdm import tqdm
@@ -207,7 +209,7 @@ def populate_test_cases_with_predefined_functions(test_cases):
     Multi-turn and Agentic test cases don't have the function doc in the prompt. We need to add them here.
     """
     for entry in test_cases:
-        if not is_multi_turn(entry["id"]) and not is_agentic(entry["id"]):
+        if not is_multi_turn(entry["id"]) and not is_agentic(entry["id"]) and not is_sql(entry["id"]):
             continue
         involved_classes = entry["involved_classes"]
         entry["function"] = []

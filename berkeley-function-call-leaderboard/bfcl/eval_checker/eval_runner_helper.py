@@ -354,13 +354,10 @@ def generate_leaderboard_csv(
         javascript_simple_ast_non_live = get_category_score(value, "javascript")
         rest_simple_exec_non_live = get_category_score(value, "rest")
         irrelevance_non_live = get_category_score(value, "irrelevance")
+        sql_non_live = get_category_score(value, "sql")
 
         simple_ast_non_live = calculate_unweighted_accuracy(
-            [
-                python_simple_ast_non_live,
-                java_simple_ast_non_live,
-                javascript_simple_ast_non_live,
-            ]
+            [python_simple_ast_non_live, java_simple_ast_non_live, javascript_simple_ast_non_live, sql_non_live]
         )
         multiple_ast_non_live = python_multiple_ast_non_live
         parallel_ast_non_live = python_parallel_ast_non_live
@@ -665,6 +662,7 @@ def check_model_category_status(score_path):
         "java",
         "javascript",
         "rest",
+        "sql"
         "live_simple",
         "live_multiple",
         "live_parallel",
