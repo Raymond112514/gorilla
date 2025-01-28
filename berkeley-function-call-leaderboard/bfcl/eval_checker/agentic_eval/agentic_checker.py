@@ -1,5 +1,5 @@
-from bfcl.eval_checker.ast_eval.ast_checker import standardize_string
-
+# from bfcl.eval_checker.ast_eval.ast_checker import standardize_string
+import re
 
 #### Main functions ####
 
@@ -11,9 +11,14 @@ def agentic_checker(model_response: str, possible_answer_list: list[str]) -> dic
     standardized_possible_answer_list = [
         standardize_string(possible_answer) for possible_answer in possible_answer_list
     ]
+    # Sometimes the model response is a list of one string
+    if type(model_response) is list:
+        model_response = model_response[0]
+
     standardized_model_response = standardize_string(model_response)
+
     for possible_answer in standardized_possible_answer_list:
-        if possible_answer in standardized_model_response:
+        if re.search(rf"\b{re.escape(possible_answer)}\b", standardized_model_response):
             return {"valid": True, "error": []}
 
     return {
@@ -30,3 +35,14 @@ def agentic_checker(model_response: str, possible_answer_list: list[str]) -> dic
 
 
 #### Helper functions ####
+
+
+def standardize_string(input_string: str):
+    """
+    This function standardizes the string by removing all the ",./-_*^()" punctuation, and converting it to lowercase
+    It will also convert all the single quotes to double quotes
+    This is used to compare the model output with the possible answers
+    We don't want to punish model for answer like April 1, 2024 vs April 1,2024, vs April 1 2024
+    """
+    regex_string = r"[\,\.\/\-\_\*\^\(\)]"
+    return re.sub(regex_string, "", input_string).lower().replace("'", '"')
