@@ -194,6 +194,7 @@ def process_memory_test_case(test_cases):
             else:
                 entry["depends_on"] = deepcopy(memory_base_ids)
                 add_basic = True
+            entry["question"][0][0]["content"] += "   You must respond in this format: `{'answer': YOUR_ANSWER}`. If you do not know the answer, respond with `{'answer': 'I do not know', 'reason': WHY_YOU_CANNOT_ANSWER}`."
 
     # Add the memory prerequisite entries to the test cases
     if add_basic:

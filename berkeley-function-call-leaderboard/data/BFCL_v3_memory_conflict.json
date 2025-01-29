@@ -12,16 +12,16 @@
 {"id": "memory_conflict_11", "question": [[{"role": "user", "content": "What kind of post-grad work model am I against?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_12", "question": [[{"role": "user", "content": "What's my biggest fear?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_13", "question": [[{"role": "user", "content": "Where did I go for a sailing trip before sophomore year?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_conflict_14", "question": [[{"role": "user", "content": "In terms of best lobsters I've had, what's the rank of the lobsters I had in Maine?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_conflict_14", "question": [[{"role": "user", "content": "In terms of best lobsters I've had, what's the rank of the lobsters I had in Maine? Give the number."}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_15", "question": [[{"role": "user", "content": "Who got me into sci-fi novels?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_16", "question": [[{"role": "user", "content": "What place do I not want to take my crush to anymore?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_17", "question": [[{"role": "user", "content": "What's my crush's minor?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_18", "question": [[{"role": "user", "content": "What breed is my dog?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_conflict_19", "question": [[{"role": "user", "content": "When did I get my dog?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_conflict_20", "question": [[{"role": "user", "content": "What happened to Archie's sensitive stomach?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_conflict_19", "question": [[{"role": "user", "content": "What year of college did I get my dog?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_conflict_20", "question": [[{"role": "user", "content": "What part of Archie's body was sensitive?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_21", "question": [[{"role": "user", "content": "What club did I drop recently?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_22", "question": [[{"role": "user", "content": "Who else was in the lab the night Carla and Ibonded over pizza at 3 a.m.?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_23", "question": [[{"role": "user", "content": "How old am I?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_24", "question": [[{"role": "user", "content": "How old is my sister?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_conflict_25", "question": [[{"role": "user", "content": "When does Midnight Breakfast start?"}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_conflict_25", "question": [[{"role": "user", "content": "When does Midnight Breakfast start? Return in the format: HH:MM (e.g. 03:00)."}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_26", "question": [[{"role": "user", "content": "What's my dad's occupation?"}]], "involved_classes": ["MemoryAPI"]}
