@@ -101,7 +101,8 @@ class MemoryAPI:
                 f,
                 indent=4,
             )
-
+            
+    @staticmethod
     def _similarity_search(query: str, corpus: list[str], k: int = 5):
         """
         Search for the most similar text in the corpus to the query using BM25+ algorithm.
