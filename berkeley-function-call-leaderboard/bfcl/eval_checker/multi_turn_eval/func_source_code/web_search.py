@@ -1,4 +1,5 @@
 import os
+import time
 
 import html2text
 import requests
@@ -127,6 +128,7 @@ class WebSearchAPI:
             return {"error": str(e)}
 
         # try:
+        #     time.sleep(1)
         #     return DDGS().text(keywords=keywords, region=region, max_results=max_results)
         # except Exception as e:
         #     return {"error": str(e)}
@@ -169,7 +171,7 @@ class WebSearchAPI:
                 "Sec-Fetch-User": "?1",
                 "Sec-Fetch-Dest": "document",
             }
-            response = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers, timeout=20, allow_redirects=True)
             response.raise_for_status()
 
             # Process the response based on the mode

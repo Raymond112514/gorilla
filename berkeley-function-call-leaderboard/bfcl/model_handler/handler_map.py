@@ -38,7 +38,6 @@ from bfcl.model_handler.local_inference.salesforce import SalesforceHandler
 
 # Inference through API calls
 api_inference_handler_map = {
-    "DeepSeek-V3": DeepSeekAPIHandler,
     "o1-2024-12-17-FC": OpenAIHandler,
     "o1-2024-12-17": OpenAIHandler,
     "o1-mini-2024-09-12": OpenAIHandler,
@@ -57,24 +56,13 @@ api_inference_handler_map = {
     "nova-pro-v1.0": NovaHandler,
     "nova-lite-v1.0": NovaHandler,
     "nova-micro-v1.0": NovaHandler,
-    "open-mistral-nemo-2407": MistralHandler,
-    "open-mistral-nemo-2407-FC": MistralHandler,
-    "open-mixtral-8x22b": MistralHandler,
-    "open-mixtral-8x22b-FC": MistralHandler,
-    "open-mixtral-8x7b": MistralHandler,
-    "mistral-large-2407": MistralHandler,
-    "mistral-large-2407-FC": MistralHandler,
-    "firefunction-v2-FC": FireworksHandler,
     "gemini-2.0-flash-exp": GeminiHandler,
     "gemini-2.0-flash-exp-FC": GeminiHandler,
     "gemini-1.5-pro-002": GeminiHandler,
     "gemini-1.5-pro-002-FC": GeminiHandler,
-    "gemini-1.0-pro-002": GeminiHandler,
-    "gemini-1.0-pro-002-FC": GeminiHandler,
     "databricks-dbrx-instruct": DatabricksHandler,
     "command-r-plus-FC": CohereHandler,
     "command-r7b-12-2024-FC": CohereHandler,
-    "grok-beta": GrokHandler,
 }
 
 # Inference through local hosting
