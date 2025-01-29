@@ -10,6 +10,7 @@ from bfcl.constant import (
     SQL_FUNC_DOC_PATH,
     TEST_COLLECTION_MAPPING,
     TEST_FILE_MAPPING,
+    MULTI_TURN_FUNC_DOC_PATH,
     VERSION_PREFIX,
 )
 from bfcl.eval_checker.agentic_eval.agentic_checker import agentic_checker
@@ -503,7 +504,7 @@ def ast_file_runner(
         index: str = model_result[i]["id"]
         model_result_item = model_result[i]["result"]
         if is_sql(test_category):
-            with open((SQL_FUNC_DOC_PATH/"sql_function_source_code.json").resolve(), "r") as f:
+            with open((MULTI_TURN_FUNC_DOC_PATH/"sql.json").resolve(), "r") as f:
                 prompt_item = [json.loads(line) for line in f.readlines()]
         else:
             prompt_item = prompt[i]["function"]
