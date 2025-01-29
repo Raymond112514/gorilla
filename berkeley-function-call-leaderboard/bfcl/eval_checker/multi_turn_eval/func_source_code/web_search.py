@@ -95,38 +95,38 @@ class WebSearchAPI:
             - 'body' (str): A brief description or snippet from the search result.
         """
 
-        # try:
-        #     params = {
-        #         "engine": "duckduckgo",
-        #         "q": keywords,
-        #         "kl": region,
-        #         "api_key": os.getenv("SERPAPI_API_KEY"),
-        #     }
-
-        #     search = GoogleSearch(params)
-        #     search_results = search.get_dict()
-        #     search_results = search_results["organic_results"]
-
-        #     # Convert the search results to the desired format
-        #     results = []
-        #     for result in search_results[:max_results]:
-        #         results.append(
-        #             {
-        #                 "title": result["title"],
-        #                 "href": result["link"],
-        #                 "body": result["snippet"],
-        #             }
-        #         )
-
-        #     return results
-
-        # except Exception as e:
-        #     return {"error": str(e)}
-
         try:
-            return DDGS().text(keywords=keywords, region=region, max_results=max_results)
+            params = {
+                "engine": "duckduckgo",
+                "q": keywords,
+                "kl": region,
+                "api_key": os.getenv("SERPAPI_API_KEY"),
+            }
+
+            search = GoogleSearch(params)
+            search_results = search.get_dict()
+            search_results = search_results["organic_results"]
+
+            # Convert the search results to the desired format
+            results = []
+            for result in search_results[:max_results]:
+                results.append(
+                    {
+                        "title": result["title"],
+                        "href": result["link"],
+                        "body": result["snippet"],
+                    }
+                )
+
+            return results
+
         except Exception as e:
             return {"error": str(e)}
+
+        # try:
+        #     return DDGS().text(keywords=keywords, region=region, max_results=max_results)
+        # except Exception as e:
+        #     return {"error": str(e)}
 
     def fetch_url_content(self, url: str, mode: str = "raw") -> str:
         """
