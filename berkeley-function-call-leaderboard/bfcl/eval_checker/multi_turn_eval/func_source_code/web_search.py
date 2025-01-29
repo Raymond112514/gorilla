@@ -105,6 +105,9 @@ class WebSearchAPI:
 
             search = GoogleSearch(params)
             search_results = search.get_dict()
+            if "error" in search_results:
+                return search_results
+
             search_results = search_results["organic_results"]
 
             # Convert the search results to the desired format
