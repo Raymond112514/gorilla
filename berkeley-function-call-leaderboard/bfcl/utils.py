@@ -161,12 +161,15 @@ def sort_key(entry):
     # Single-turn happen second
     elif not is_multi_turn(test_category) and not is_agentic(test_category):
         priority = 1
-    # Multi-turn happen third
+    # Multi-turn happen fourth
     elif is_multi_turn(test_category):
         priority = 3
     # Memory happen last
     elif is_memory(test_category):
         priority = 4
+    # Agentic (web search) happen third
+    elif is_agentic(test_category):
+        priority = 2
 
     return (priority, test_category, int(index))
 
