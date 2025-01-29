@@ -75,6 +75,7 @@ def agentic_runner(
                     "possible_answer": possible_answer_item,
                 }
             )
+            continue
 
         # Try decoding the model results into executable function calls
         # Note: We only care about the last non-function-call message, which should fail to get decoded.
@@ -117,6 +118,7 @@ def agentic_runner(
                     "possible_answer": possible_answer_item,
                 }
             )
+            continue
 
         # Check if the model output contains the expected answer
         accuracy_checker_result = agentic_checker(
