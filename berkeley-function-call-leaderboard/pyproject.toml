@@ -37,7 +37,8 @@ dependencies = [
     "boto3",
     "duckduckgo_search",
     "beautifulsoup4",
-    "html2text"
+    "html2text",
+    "rank_bm25"
 ]
 
 [project.scripts]
