@@ -38,7 +38,8 @@ dependencies = [
     "duckduckgo_search",
     "beautifulsoup4",
     "html2text",
-    "rank_bm25"
+    "rank_bm25",
+    "google-search-results"
 ]
 
 [project.scripts]
