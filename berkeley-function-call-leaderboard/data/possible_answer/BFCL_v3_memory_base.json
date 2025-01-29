@@ -5,7 +5,7 @@
 {"id": "memory_base_4", "ground_truth": ["Ten", "10"], "source": "Capstone alone can eat up a solid ten hours a week\u2014more if you run into a big bug..."}
 {"id": "memory_base_5", "ground_truth": ["Gym", "Gymming", "Workout", "Working out"], "source": "Now, I try to hit the gym around four times a week."}
 {"id": "memory_base_6", "ground_truth": ["Survival"], "source": "Lately, I\u2019ve been really into co-op survival games \u2014 the kind where you have to gather resources..."}
-{"id": "memory_base_7", "ground_truth": ["Ethical implications", "Ethical implication", "Ethics", "Social implications", "Social implication"], "source": "Books like that also help me consider the ethical and social implications of what I\u2019m studying..."}
+{"id": "memory_base_7", "ground_truth": ["Infinity Courts", "Infinity Court"], "source": "My favorite AI-themed sci-fi book right now is 'The Infinity Courts' by Akemi Dawn Bowman."}
 {"id": "memory_base_8", "ground_truth": ["Hobbies", "Hobby"], "source": "I\u2019ve found that scheduling them \u2014 just like I schedule study time \u2014 helps me keep a healthy balance."}
 {"id": "memory_base_9", "ground_truth": ["Gym", "Gymming", "Workout", "Working out"], "source": "It\u2019s not like I\u2019m trying to become a bodybuilder or anything, but I love seeing incremental improvements."}
 {"id": "memory_base_10", "ground_truth": ["0", "Zero", "None", "No paper"], "source": "Eventually, I co-authored my first paper on this system... it\u2019s probably one of my proudest moments in college."}
@@ -47,4 +47,4 @@
 {"id": "memory_base_46", "ground_truth": ["Task manager"], "source": "I use a digital task manager that syncs across my devices..."}
 {"id": "memory_base_47", "ground_truth": ["Gym", "Gymming", "Workout", "Working out"], "source": "I\u2019ve discovered that if I skip the gym too many days... I consider my workout time to be non-negotiable..."}
 {"id": "memory_base_48", "ground_truth": ["11:00 PM"], "source": "But most evenings, I try to cut off academic work by 11:00 P.M. so I can decompress."}
-{"id": "memory_base_49", "ground_truth": ["Anxiety"], "source": "I'll do a quick review of my schedule for the next day... It helps ease any anxiety before I go to bed."}
+{"id": "memory_base_49", "ground_truth": ["7", "Seven"], "source": "Sundays, I attend a group study session with seven other classmates..."}

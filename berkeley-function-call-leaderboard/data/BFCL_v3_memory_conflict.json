@@ -23,5 +23,5 @@
 {"id": "memory_conflict_22", "question": [[{"role": "user", "content": "Who else was in the lab the night Carla and Ibonded over pizza at 3 a.m.?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_23", "question": [[{"role": "user", "content": "How old am I?"}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_24", "question": [[{"role": "user", "content": "How old is my sister?"}]], "involved_classes": ["MemoryAPI"]}
-{"id": "memory_conflict_25", "question": [[{"role": "user", "content": "When does Midnight Breakfast start? Return in the format: HH:MM (e.g. 03:00)."}]], "involved_classes": ["MemoryAPI"]}
+{"id": "memory_conflict_25", "question": [[{"role": "user", "content": "When does Midnight Breakfast start? Return in the format: HH:MM AM/PM (e.g. 01:30 AM)."}]], "involved_classes": ["MemoryAPI"]}
 {"id": "memory_conflict_26", "question": [[{"role": "user", "content": "What's my dad's occupation?"}]], "involved_classes": ["MemoryAPI"]}

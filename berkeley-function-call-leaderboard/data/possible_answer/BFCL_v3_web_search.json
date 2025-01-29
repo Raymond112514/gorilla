@@ -43,7 +43,7 @@
 {"id": "web_search_42", "ground_truth": ["5471"], "source": ["https://www.youtube.com/watch?v=kcPGk1_QeT8"]}
 {"id": "web_search_43", "ground_truth": ["61"], "source": ["https://genius.com/Genius-romanizations-rose-and-bruno-mars-apt-romanized-lyrics"]}
 {"id": "web_search_44", "ground_truth": ["2", "two"], "source": ["https://genius.com/Kendrick-lamar-not-like-us-lyrics"]}
-{"id": "web_search_45", "ground_truth": ["\u042d\u0442", "эт", "et"], "source": ["https://sakhatyla.ru/translate?q=\u043c\u044f\u0441\u043e"]}
+{"id": "web_search_45", "ground_truth": ["\u042d\u0442", "\u044d\u0442", "et"], "source": ["https://sakhatyla.ru/translate?q=\u043c\u044f\u0441\u043e"]}
 {"id": "web_search_46", "ground_truth": ["Ursula von der Leyen"], "source": ["https://www.forbes.com/lists/power-women/"]}
 {"id": "web_search_47", "ground_truth": ["Disfrutar"], "source": ["https://www.cnn.com/travel/worlds-50-best-restaurants-for-2024/index.html"]}
 {"id": "web_search_48", "ground_truth": ["110"], "source": ["https://blog.google/products/translate/google-translate-new-languages-2024/"]}
