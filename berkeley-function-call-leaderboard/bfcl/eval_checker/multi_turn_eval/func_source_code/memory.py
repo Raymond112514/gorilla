@@ -127,7 +127,7 @@ class MemoryAPI:
         Add a key-value pair to the short-term memory. Make sure to use meaningful keys for easy retrieval later.
 
         Args:
-            key (str): The key under which the value is stored. The key should be unique and case-sensitive.
+            key (str): The key under which the value is stored. The key should be unique and case-sensitive. Keys must be snake_case and cannot contain spaces.
             value (str): The value to store in the short-term memory.
 
         Returns:
@@ -245,7 +245,7 @@ class MemoryAPI:
         """
         Add a key-value pair to the long-term memory. Make sure to use meaningful keys for easy retrieval later.
         Args:
-            key (str): The key under which the value is stored. The key should be unique and case-sensitive.
+            key (str): The key under which the value is stored. The key should be unique and case-sensitive. Keys must be snake_case and cannot contain spaces.
             value (str): The value to store in the long-term memory.
 
         Returns:
