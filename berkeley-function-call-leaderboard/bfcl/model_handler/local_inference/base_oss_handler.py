@@ -3,6 +3,7 @@ import subprocess
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 import requests
 from bfcl.constant import RESULT_PATH
@@ -203,6 +204,7 @@ class OSSHandler(BaseHandler, EnforceOverrides):
                             events,
                             include_input_log,
                             exclude_state_log,
+                            result_dir,
                         )
                         futures.append(future)
 
@@ -235,7 +237,7 @@ class OSSHandler(BaseHandler, EnforceOverrides):
 
     @final
     def _multi_threaded_inference(
-        self, test_case, events, include_input_log: bool, exclude_state_log: bool
+        self, test_case, events, include_input_log: bool, exclude_state_log: bool, result_dir: Path
     ):
         """
         This is a wrapper function to make sure that, if an error occurs during inference, the process does not stop.
@@ -249,7 +251,7 @@ class OSSHandler(BaseHandler, EnforceOverrides):
         try:
             if is_multi_turn(test_case["id"]) or is_agentic(test_case["id"]):
                 model_responses, metadata = self.inference_multi_turn_prompting(
-                    test_case, include_input_log, exclude_state_log
+                    test_case, include_input_log, exclude_state_log, result_dir
                 )
             else:
                 model_responses, metadata = self.inference_single_turn_prompting(
