@@ -58,8 +58,6 @@ api_inference_handler_map = {
     "nova-micro-v1.0": NovaHandler,
     "gemini-2.0-flash-exp": GeminiHandler,
     "gemini-2.0-flash-exp-FC": GeminiHandler,
-    "gemini-1.5-pro-002": GeminiHandler,
-    "gemini-1.5-pro-002-FC": GeminiHandler,
     "databricks-dbrx-instruct": DatabricksHandler,
     "command-r-plus-FC": CohereHandler,
     "command-r7b-12-2024-FC": CohereHandler,
