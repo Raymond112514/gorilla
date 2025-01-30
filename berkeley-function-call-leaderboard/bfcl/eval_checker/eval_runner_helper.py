@@ -191,6 +191,7 @@ def calculate_unweighted_accuracy(accuracy_dict_list, display_na_if_category_mis
 
     return result
 
+
 def record_result(leaderboard_table, model_name, test_category, accuracy, total_count):
     if model_name not in leaderboard_table:
         leaderboard_table[model_name] = {}
@@ -345,19 +346,26 @@ def generate_leaderboard_csv(
         python_simple_ast_non_live = get_category_score(value, "simple")
         python_multiple_ast_non_live = get_category_score(value, "multiple")
         python_parallel_ast_non_live = get_category_score(value, "parallel")
-        python_parallel_multiple_ast_non_live = get_category_score(value, "parallel_multiple")
+        python_parallel_multiple_ast_non_live = get_category_score(
+            value, "parallel_multiple"
+        )
         python_simple_exec_non_live = get_category_score(value, "exec_simple")
         python_multiple_exec_non_live = get_category_score(value, "exec_multiple")
         python_parallel_exec_non_live = get_category_score(value, "exec_parallel")
-        python_parallel_multiple_exec_non_live = get_category_score(value, "exec_parallel_multiple")
+        python_parallel_multiple_exec_non_live = get_category_score(
+            value, "exec_parallel_multiple"
+        )
         java_simple_ast_non_live = get_category_score(value, "java")
         javascript_simple_ast_non_live = get_category_score(value, "javascript")
         rest_simple_exec_non_live = get_category_score(value, "rest")
         irrelevance_non_live = get_category_score(value, "irrelevance")
-        sql_non_live = get_category_score(value, "sql")
 
         simple_ast_non_live = calculate_unweighted_accuracy(
-            [python_simple_ast_non_live, java_simple_ast_non_live, javascript_simple_ast_non_live, sql_non_live]
+            [
+                python_simple_ast_non_live,
+                java_simple_ast_non_live,
+                javascript_simple_ast_non_live,
+            ]
         )
         multiple_ast_non_live = python_multiple_ast_non_live
         parallel_ast_non_live = python_parallel_ast_non_live
@@ -428,7 +436,9 @@ def generate_leaderboard_csv(
         python_simple_ast_live = get_category_score(value, "live_simple")
         python_multiple_ast_live = get_category_score(value, "live_multiple")
         python_parallel_ast_live = get_category_score(value, "live_parallel")
-        python_parallel_multiple_ast_live = get_category_score(value, "live_parallel_multiple")
+        python_parallel_multiple_ast_live = get_category_score(
+            value, "live_parallel_multiple"
+        )
         irrelevance_live = get_category_score(value, "live_irrelevance")
         relevance_live = get_category_score(value, "live_relevance")
         summary_ast_live = calculate_weighted_accuracy(
@@ -494,6 +504,20 @@ def generate_leaderboard_csv(
             ]
         )
 
+        # Agentic Score
+        agentic_web_search = get_category_score(value, "web_search")
+        agentic_memory_base = get_category_score(value, "memory_base")
+        agentic_sql = get_category_score(value, "sql")
+
+        overall_accuracy_agentic = calculate_unweighted_accuracy(
+            [
+                agentic_web_search,
+                agentic_memory_base,
+                agentic_sql,
+            ],
+            display_na_if_category_missing=False,
+        )
+
         # Total Score
         single_turn_ast = calculate_unweighted_accuracy(
             [overall_accuracy_live, overall_accuracy_non_live]
@@ -508,6 +532,7 @@ def generate_leaderboard_csv(
                 overall_accuracy_live,
                 overall_accuracy_non_live,
                 overall_accuracy_multi_turn,
+                overall_accuracy_agentic,
             ],
             display_na_if_category_missing=False,
         )
@@ -542,6 +567,10 @@ def generate_leaderboard_csv(
                 multi_turn_miss_func["display_accuracy"],
                 multi_turn_miss_param["display_accuracy"],
                 multi_turn_long_context["display_accuracy"],
+                overall_accuracy_agentic["display_accuracy"],
+                agentic_web_search["display_accuracy"],
+                agentic_memory_base["display_accuracy"],
+                agentic_sql["display_accuracy"],
                 total_relevance["display_accuracy"],
                 total_irrelevance["display_accuracy"],
                 MODEL_METADATA_MAPPING[model_name_escaped][2],
@@ -662,8 +691,7 @@ def check_model_category_status(score_path):
         "java",
         "javascript",
         "rest",
-        "sql"
-        "live_simple",
+        "sql" "live_simple",
         "live_multiple",
         "live_parallel",
         "live_parallel_multiple",

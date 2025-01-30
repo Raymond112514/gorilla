@@ -636,6 +636,7 @@ def runner(model_names, test_categories, api_sanity_check, result_dir, score_dir
             if (
                 is_chatable(test_category)
                 or is_memory_prereq(test_category)
+                or "conflict" in test_category
             ):
                 continue
 
