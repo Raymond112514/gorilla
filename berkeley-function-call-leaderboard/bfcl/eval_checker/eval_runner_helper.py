@@ -332,6 +332,7 @@ def generate_leaderboard_csv(
     data_non_live = []
     data_live = []
     data_multi_turn = []
+    data_agentic = []
     data_combined = []
     for model_name, value in leaderboard_table.items():
         model_name_escaped = model_name.replace("_", "/")
@@ -517,6 +518,16 @@ def generate_leaderboard_csv(
             ],
             display_na_if_category_missing=False,
         )
+        data_agentic.append(
+            [
+                "N/A",
+                MODEL_METADATA_MAPPING[model_name_escaped][0],
+                overall_accuracy_agentic["display_accuracy"],
+                agentic_web_search["display_accuracy"],
+                agentic_memory_base["display_accuracy"],
+                agentic_sql["display_accuracy"],
+            ]
+        )
 
         # Total Score
         single_turn_ast = calculate_unweighted_accuracy(
@@ -599,6 +610,14 @@ def generate_leaderboard_csv(
         data=data_multi_turn,
         file_path=output_path / "data_multi_turn.csv",
         header=COLUMNS_MULTI_TURN,
+        sort_column_index=2,
+    )
+
+    # Write Agentic Score File
+    write_score_csv_file(
+        data=data_agentic,
+        file_path=output_path / "data_agentic.csv",
+        header=COLUMNS_AGENTIC,
         sort_column_index=2,
     )
 
